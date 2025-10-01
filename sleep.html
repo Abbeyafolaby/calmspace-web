@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Guide</title>
+  <link rel="stylesheet" href="Styles/sleep.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Play Button -->
+    <a href="#" onclick="playAudio(event)" class="play-btn">
+      <img src="https://i.postimg.cc/cLyxnkPz/OIP.jpg" alt="Play Sleep Music">
+    </a>
+
+    <!-- Hidden Audio -->
+    <audio id="myAudio">
+      <source src="https://living-jade-ktakggbrow.edgeone.app/relaxing-sleep-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Sleep Guide -->
+    <div class="practice">
+      <h2>How to Improve Your Sleep</h2>
+      <p>1. <b>Set a routine</b> by going to bed and waking up at the same time daily.</p>
+      <p>2. <b>Create a sleep-friendly environment</b> — keep your room cool, dark, and quiet.</p>
+      <p>3. <b>Avoid screens</b> at least 1 hour before bed to reduce blue-light stimulation.</p>
+      <p>4. <b>Practice relaxation</b> — read, meditate, or use breathing exercises.</p>
+      <p>5. <b>Limit caffeine and heavy meals</b> in the evening.</p>
+
+      <div class="practice1">
+        <p><b>Benefits:</b> Quality sleep restores your body, sharpens your mind, boosts mood, and strengthens immunity.</p>
+      </div>
+    </div>
+
+    <!-- More Sleep Tips -->
+    <div class="tips">
+      <h2>Sleep Hygiene Practices</h2>
+
+      <div class="tip-card">
+        <h3>🌙 Nighttime Routine</h3>
+        <p>Dim the lights, take a warm shower, and do calming activities before bed.</p>
+        <p><b>Benefit:</b> Signals your body it’s time to sleep and relax.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>📵 Digital Detox</h3>
+        <p>Keep phones, laptops, and TVs away from your sleeping area.</p>
+        <p><b>Benefit:</b> Reduces overstimulation and improves sleep quality.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🛏️ Comfortable Sleep Space</h3>
+        <p>Invest in a supportive mattress, soft pillows, and breathable sheets.</p>
+        <p><b>Benefit:</b> Enhances relaxation and prevents body aches.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🌿 Relaxation Techniques</h3>
+        <p>Try deep breathing, meditation, or light stretches before sleep.</p>
+        <p><b>Benefit:</b> Calms your nervous system and prepares you for rest.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function playAudio(event) {
+      event.preventDefault(); 
+      const audio = document.getElementById("myAudio");
+
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>

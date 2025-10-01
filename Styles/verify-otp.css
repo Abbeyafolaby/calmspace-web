@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.otp-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 300px;
+}
+
+.otp-container h2 {
+  margin-bottom: 10px;
+}
+
+.otp-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.otp-container button {
+  width: 100%;
+  padding: 0.8rem;
+  background: #4cafef;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.otp-container button:hover {
+  background: #3a9cd6;
+}

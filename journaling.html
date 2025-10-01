@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journaling Guide</title>
+  <link rel="stylesheet" href="Styles/journaling.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Play Button -->
+    <a href="#" onclick="playAudio(event)" class="play-btn">
+      <img src="https://i.postimg.cc/ydqkYYsD/journaling.png" alt="Play Relaxing Music">
+    </a>
+
+    <!-- Hidden Audio -->
+    <audio id="myAudio">
+      <source src="https://living-jade-ktakggbrow.edgeone.app/relaxing-journal-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Journaling Guide -->
+    <div class="practice">
+      <h2>How to Start Journaling</h2>
+      <p>1. <b>Find a quiet space</b> where you won’t be disturbed.</p>
+      <p>2. <b>Set a timer</b> for 5–10 minutes to keep your practice simple.</p>
+      <p>3. <b>Write freely</b> without worrying about grammar or structure.</p>
+      <p>4. <b>Reflect</b> on your emotions, thoughts, or events of the day.</p>
+      <p>5. End with a <b>positive note</b> — gratitude, an affirmation, or a hopeful thought.</p>
+
+      <div class="practice1">
+        <p><b>Benefits:</b> Journaling improves self-awareness, reduces stress, helps process emotions, and strengthens clarity in decision-making.</p>
+      </div>
+    </div>
+
+    <!-- More Journaling Tips -->
+    <div class="tips">
+      <h2>Journaling Prompts & Techniques</h2>
+
+      <div class="tip-card">
+        <h3>📝 Gratitude Journal</h3>
+        <p>Write down 3 things you’re grateful for each day.</p>
+        <p><b>Benefit:</b> Builds positivity and rewires your brain to focus on joy.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🌅 Morning Pages</h3>
+        <p>Write 1–2 pages of unfiltered thoughts first thing in the morning.</p>
+        <p><b>Benefit:</b> Clears mental clutter and sparks creativity.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🌙 Evening Reflection</h3>
+        <p>Record your highlights, lessons, and challenges of the day.</p>
+        <p><b>Benefit:</b> Encourages mindfulness and better sleep.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>💡 Prompt Journaling</h3>
+        <p>Examples: “What made me smile today?” or “What do I need to let go of?”</p>
+        <p><b>Benefit:</b> Unlocks deeper insights and emotional release.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function playAudio(event) {
+      event.preventDefault(); 
+      const audio = document.getElementById("myAudio");
+
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>

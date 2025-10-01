@@ -1,0 +1,253 @@
+:root{
+  --green1: #064e3b;
+  --green2: #065546;
+  --green3: #047857;
+  --green4: #059669;
+  --green5: #10b981;
+  --green6: #34d399;
+  --green7: #6ee7b7;
+  --green8: #a7f3d0;
+  --green: #dde7e0;
+  --green9: #F3F8F5;
+  --lightblack: #F8FAFC;
+  --greengrey: #E1F0E6;
+  --gold: #D97706;
+  --pink: rgb(185, 6, 56);
+  --tomatoes: rgb(255, 0, 0);
+}
+
+/* include padding in width calculations to avoid overflow */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* reset */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden; /* important to prevent horizontal scroll */
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--lightblack); /* navbar area plain */
+}
+
+/* NAVBAR */
+.navbar {
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--green5);
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px var(--green5);
+  background: white;
+  padding: 12px 18px;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+/* ensure lis don't create unexpected block spacing */
+.navbar li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* logo */
+.navbar1 a img {
+  display: block;
+  max-height: 48px;
+  width: auto;
+  max-width: 140px; /* prevents huge logos on wide screens */
+}
+
+/* small helper, keep skip link tidy */
+.navbar2 a {
+  text-decoration: none;
+  color: var(--green5);
+  font-weight: 600;
+  display: inline-block;
+  padding: 6px 10px;
+}
+
+/* BACKGROUND SECTION */
+.calmspace_bg {
+  background-image: url('https://i.postimg.cc/xCxM1cXB/dbd531eb19cdee32c56d1cfe3de565cc4973881b.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 36px 16px; /* keep some breathing room */
+  position: relative;
+   
+}
+
+/* WELCOME BOX - responsive sizing and no overflow */
+.welcome_space {
+  background: white;
+  border: 1px solid var(--green5);
+  border-radius: 15px;
+  padding: 32px;
+  max-width: 600px;
+  width: min(600px, 94%);
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  margin-top: -80px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-wrap: break-word;
+  
+}
+
+/* Content styles */
+.welcome_space h1 {
+  color: var(--green5);
+  margin: 0 0 12px 0;
+  font-size: clamp(20px, 3.6vw, 28px);
+}
+
+.welcome_space .button_group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: nowrap; 
+  width: 100%;
+  margin-top: 20px;
+}
+
+.welcome_space p {
+  color: #333;
+  margin: 0 0 16px 0px;
+  font-size: clamp(14px, 2.4vw, 16px);
+  position:relative;
+  left:-20px;
+}
+label {
+  color: #222;
+  font-weight: 600;
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Buttons: allow wrapping, avoid fixed sizes that force overflow */
+.click_button {
+ display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--green4);
+  background: white;
+  color: var(--green5);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 200px;
+  max-width: 48%;
+  box-sizing: border-box;
+  text-decoration: none; 
+
+   
+}
+.click_button a {
+  color: var(--green4);
+  text-decoration: none;
+}
+.click_button:hover {
+  background: var(--green9);
+  color: var(--green7);
+}
+
+/* Make sure inline elements don't push outside container */
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----------------- Responsive breakpoints ----------------- */
+@media (max-width: 992px) {
+  .welcome_space {
+    padding: 28px;
+    margin-top: -50px;
+  }
+  .click_button {
+    width: 45%;
+    max-width: 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* stack navbar items and center them */
+  .navbar {
+    /* flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px; */
+    padding: 10px 12px;
+
+  }
+  .navbar1, .navbar2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+   .navbar1 a img {
+    max-height: 40px;
+    max-width: 120px;
+  }
+
+  .navbar2 a {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+  
+  .welcome_space {
+    margin-top: 12px;
+    padding: 20px;
+    width: min(560px, 96%);
+  }
+
+  /* make buttons full width to avoid horizontal overflow */
+  .click_button {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome_space {
+    padding: 16px;
+    margin-top: 12px;
+  }
+  .welcome_space h1 {
+    font-size: 20px;
+  }
+  .click_button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

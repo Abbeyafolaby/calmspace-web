@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmSpace_Pricing</title>
+  <link rel="stylesheet" href="Styles/pricing.css">
+  <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/g0SwLJLZ/Calmspace-Logo.png">
+</head>
+<body>
+  <div class="nav_icon">
+    <!-- Logo -->
+    <div class="icon calmspace_logo">
+      <img src="https://i.postimg.cc/GmZXhqQV/Frame-1984078010.png" alt="">
+    </div>
+
+    <!-- Navigation Menu -->
+    <div class="icon calmspace_list" id="navMenu">
+      <ul>
+        <li><a href="landing.html">Home</a></li>
+        <li><a href="the_guide.html">Features</a></li>
+        <li class="prize"><a href="#">Pricing</a></li>
+        <li><a href="the_about.html">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Bell Icon -->
+    <div class="icon calmspace_bell">
+      <img src="https://i.postimg.cc/qvpSykC0/Container.png" alt="">
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="icon calmspace_bar" id="hamburger">
+      <img src="https://i.postimg.cc/X7WRRJRS/menu-1.png" alt="menu">
+    </div>
+  </div><br><br><br>
+
+  <!-- Hero Section -->
+  <div class="choose_wellness">
+    <h1>Choose The Plan That Fits <br>Your Wellness Journey</h1>
+    <p><b>Start free, upgrade anytime. No hidden fees.</b></p>
+  </div>
+
+  <!-- Pricing Section -->
+  <div class="premium_list">
+    <div class="premium gold1">
+      <h1>Starter Plan</h1>
+      <p>Everything you need to get <br>started!</p><br>
+      <p><span id="dollar">$0</span> /month</p><br><br>
+
+      <li>Limited daily exercise</li><br>
+      <li>Basic mindfulness resources</li><br>
+      <li>Community access</li><br><br>
+      <button class="starter_gold">
+        <a href="#">Get Started For Free</a>
+      </button>
+    </div>
+
+    <div class="premium pink1">
+      <h1>Premium Plan</h1>
+      <p>Full access to everything.</p><br>
+      <p><span id="dollar">$9.99</span> /month</p><br><br>
+
+      <li>Unlimited exercises & guided sessions</li><br>
+      <li>Personalized wellness plans</li><br>
+      <li>Offline downloads</li><br><br>
+      <li>Mood & progress tracking</li><br><br>
+      <button class="starter_gold gd">
+        <a href="#">Upgrade to Premium</a>
+      </button>
+    </div>
+
+    <div class="premium red1">
+      <h1>Professional/ <br>Team Plan</h1>
+      <p>For schools, therapy groups, or <br>companies</p><br>
+      <h4>Custom</h4>
+
+      <li>Group access & analytics</li><br>
+      <li>Dedicated account support</li><br><br><br><br><br><br>
+      <button class="starter_gold">
+        <a href="#">Contact Sales</a>
+      </button>
+    </div>
+  </div><br><br><br><br>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburger.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

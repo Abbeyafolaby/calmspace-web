@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CalmSpace_Signin</title>
+  <link rel="stylesheet" href="Styles/signin.css">
+  <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/g0SwLJLZ/Calmspace-Logo.png">
+</head>
+<body>
+  <div class="sign_section">
+    <div class="sections starto">
+      <img src="https://i.postimg.cc/XY0mbs4Z/Calmspace-Logo.png" alt="calmspace" style="height:60px">
+      <h1 class="start_text">Start your calm journey</h1>
+      <h4 class="calms1">Free to start, no pressure - just your safe for <br>calm.</h4>
+      <p class="calms">Track your moods, practice mindfulness and connect with a <br>supportive community on your path to better mental health.</p><br><br>
+
+      <div class="user_number">
+        <div class="users">
+          <h2>87%</h2>
+          <p>Users report reduced <br>stress</p>
+        </div>
+        <div class="users">
+          <h2>15k+</h2>
+          <p>Guided exercises</p>
+        </div>
+        <div class="users">
+          <h2>24/7</h2>
+          <p>Community support</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sections sig">
+      <h1 class="start_text1">Sign In<br>Welcome back!</h1>
+      <p>What are we doing today?</p>
+
+      <!-- Sign-in Form -->
+      <form id="loginForm">
+        <label for="email">Email</label><br>
+        <input type="text" id="email" placeholder="Johncorner@gmail.com" required><br><br><br>
+
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Enter your Password" required>
+          <span class="toggle-icon" onclick="togglePassword()">👁️</span>
+        </div><br><br>
+
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me</label><br>
+
+        <button type="submit" class="create_button">Sign in</button><br><br>
+      </form>
+
+      <p>Don't remember your password? <a href="#">Forget password</a></p>
+
+      <div class="divider">Or</div>
+
+      <!-- Google Button -->
+      <button class="google-btn" onclick="redirectGoogle()">
+        <img src="https://i.postimg.cc/cJbXJxFJ/googlr-removebg-preview.png" alt="Google" style="height:30px">
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="sign_below">
+        <p>Don't have an Account? <a href="signup.html">Register Now!</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      passwordField.type = passwordField.type === "password" ? "text" : "password";
+    }
+
+    function redirectGoogle() {
+      window.location.href = "https://calmspace-api.onrender.com/api/auth/google";
+    }
+  </script>
+  <script src="js/signin.js"></script>
+</body>
+</html>

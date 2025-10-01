@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merged Breathing Practice</title>
+  <link rel="stylesheet" href="Styles/the_breathing.css">
+  <style>
+    /* Make both images look clickable */
+    .container img {
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      max-width: 90%;
+    }
+
+    /* Space between the two containers */
+    .container {
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <!-- ===== First Section ===== -->
+  <div class="container">
+    <img src="https://i.postimg.cc/JzhCxm4D/inhale.jpg" alt="Inhale Practice" id="playImage2">
+
+    <audio id="myAudio2" 
+           src="https://living-jade-ktakggbrow.edgeone.app/calm-yoga-lofi-peaceful-meditation-beat-247403%20(online-audio-converter.com).mp3">
+    </audio>
+
+    <div class="practice">
+      <h2>How to Practice</h2>
+      1. <b>Inhale</b> slowly through your nose for 4 seconds, feeling your lungs fill with air.<br><br>
+      2. <b>Hold</b> your breath for 4 seconds.<br><br>
+      3. <b>Exhale</b> slowly through your mouth for 4 seconds, completely emptying your lungs.<br><br>
+      4. <b>Rest</b> for 4 seconds before beginning the next cycle.<br><br>
+
+      <div class="practice1">
+        <b>Benefits:</b> Box breathing helps reduce stress, improve focus, and calm your nervous system.
+        Practice regularly for best results.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Second Section ===== -->
+  <div class="container">
+    <img src="https://i.postimg.cc/MKgKnvYZ/guy-breathing.jpg" alt="Guy Breathing" id="playImage1">
+
+    <audio id="myAudio1" 
+           src="https://living-jade-ktakggbrow.edgeone.app/calm-yoga-lofi-peaceful-meditation-beat-247403%20(online-audio-converter.com).mp3">
+    </audio>
+
+    <div class="practice">
+      <h2>How to Practice</h2>
+      1. <b>Inhale</b> slowly through your nose for 4 seconds, feeling your lungs fill with air.<br><br>
+      2. <b>Hold</b> your breath for 4 seconds.<br><br>
+      3. <b>Exhale</b> slowly through your mouth for 4 seconds, completely emptying your lungs.<br><br>
+      4. <b>Rest</b> for 4 seconds before beginning the next cycle.<br><br>
+
+      <div class="practice1">
+        <b>Benefits:</b> Box breathing helps reduce stress, improve focus, and calm your nervous system.
+        Practice regularly for best results.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // First section
+    const playImage1 = document.getElementById('playImage1');
+    const audio1 = document.getElementById('myAudio1');
+
+    playImage1.addEventListener('click', () => {
+      if (audio1.paused) {
+        audio1.play();
+      } else {
+        audio1.pause();
+      }
+    });
+
+    // Second section
+    const playImage2 = document.getElementById('playImage2');
+    const audio2 = document.getElementById('myAudio2');
+
+    playImage2.addEventListener('click', () => {
+      if (audio2.paused) {
+        audio2.play();
+      } else {
+        audio2.pause();
+      }
+    });
+  </script>
+
+</body>
+</html>

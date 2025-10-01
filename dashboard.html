@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calmspace Dashboard</title>
+  <link rel="stylesheet" href="Styles/dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="logo">
+          <img src="https://i.postimg.cc/Kvg2rtgc/Calmspace-Logo.png" alt="Calmspace Logo">
+          <h2>Calmspace</h2>
+        </div>
+        <!-- Hamburger Button -->
+        <button class="hamburger" id="menuToggle">☰</button>
+      </div>
+
+      <nav>
+        <ul id="menuList">
+          <li class="active">Dashboard</li>
+          <li><a href="features.html"><img src="https://i.postimg.cc/RhSnfz9j/application.png" alt="">Features</a></li>
+          <li><a href="pricing.html"><img src="https://i.postimg.cc/8CScWHPW/coin.png" alt="">Pricing</a></li>
+          <li><a href="the_about.html"><img src="https://i.postimg.cc/h459mkFd/user-4.png" alt="">About Us</a></li>
+          <li><a href="the_contact.html"><img src="https://i.postimg.cc/mZHrdJzM/phone-call.png" alt="">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Settings</p>
+        <button class="signout" id="logoutBtn">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <header class="header">
+        <h2>Dashboard Overview</h2>
+        <p>Hello <span id="userNickname">User</span>!</p>
+      </header>
+
+      <section class="quote card">
+        <blockquote>"Rest is not weakness, it’s renewal."</blockquote>
+        <small>Reframes rest as a form of strength and self-care...</small>
+        <a href="sleep.html">See more quotes →</a>
+      </section>
+
+      <section class="reflection-schedule">
+        <div class="reflection card">
+          <h3>Daily Reflection</h3>
+          <ul>
+            <li>“What three things am I grateful for today?” <span>5 min</span></li>
+            <li>“What emotion stood out the most for me today?” <span>10 min</span></li>
+            <li>“What is one small win I achieved today?” <span>10 min</span></li>
+          </ul>
+        </div>
+        <div class="schedule card">
+          <h3>Daily Schedule</h3>
+          <ul>
+            <li>Breathing exercise <span>5 min</span></li>
+            <li>Yoga <span>15 min</span></li>
+            <li>Music listening <span>20 min</span></li>
+            <li>Journaling session <span>15 min</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="activities card">
+        <h3>Week Activities</h3>
+        <p>Total number of minutes: <strong>4,500</strong></p>
+        <div class="chart-container">
+          <canvas id="activityChart"></canvas>
+        </div>
+      </section>
+
+      <section class="mood-tracker card">
+        <h3>Mood Tracker - Year 2025</h3>
+        <div class="filters">
+          <button class="active">12 months</button>
+          <button>6 months</button>
+          <button>30 Days</button>
+          <button>7 Days</button>
+        </div>
+        <div class="chart-container">
+          <canvas id="moodChart"></canvas>
+        </div>
+      </section>
+
+      <section class="calendar-sessions">
+        <div class="calendar card">
+          <h3>February 2025</h3>
+          <div id="calendar"></div>
+        </div>
+        <div class="sessions card">
+          <h3>Guided Sessions</h3>
+          <ul>
+            <li><strong>Breathe Away Stress</strong> - 50:07</li>
+            <li><strong>Drift Into Sleep</strong> - 09:12</li>
+            <li><strong>Morning Clarity</strong> - 12:09</li>
+            <li><strong>Checking In</strong> - 10:45</li>
+            <li><strong>Building Your Calm Routine</strong> - 24:32</li>
+            <li><strong>From Anxious to Aware</strong> - 17:06</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Chart.js and dashboard logic -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/dashboard.js"></script>
+  
+
+  <!-- Toggle Menu Script -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const menuList = document.getElementById("menuList");
+
+    menuToggle.addEventListener("click", () => {
+      menuList.classList.toggle("show");
+    });
+  </script>
+</body>
+</html>

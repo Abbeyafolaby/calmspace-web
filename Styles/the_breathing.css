@@ -1,0 +1,93 @@
+/* ===== Color Variables ===== */
+:root {
+  --green1: #064e3b;
+  --green2: #065546;
+  --green3: #047857;
+  --green4: #059669;
+  --green5: #10b981;
+  --green6: #34d399;
+  --green7: #6ee7b7;
+  --green8: #a7f3d0;
+  --green:  #dde7e0;
+  --green9: #F3F8F5;
+  --lightblack: #F8FAFC;
+  --greengrey: #E1F0E6;
+  --grey1: #F8FAFC;
+}
+
+/* ===== Base Layout ===== */
+body {
+  display: flex;
+  flex-direction: column;   /* stack multiple containers vertically */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  background: #f9fdfb;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Container Style ===== */
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  background: var(--green9);
+  margin-bottom: 40px;       /* spacing between sections */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Make images scale nicely */
+.container img {
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.container img:hover {
+  transform: scale(1.02);
+}
+
+/* ===== Practice Info Box ===== */
+.practice1 {
+  border: 2px solid var(--green7);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--green8);
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 20px auto 0;
+}
+
+.practice h2 {
+  color: var(--green3);
+  margin-top: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .practice1 {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .practice h2 {
+    font-size: 18px;
+  }
+}

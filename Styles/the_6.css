@@ -1,0 +1,61 @@
+:root {
+  --green1: #064e3b;
+  --green2: #065546;
+  --green3: #047857;
+  --green4: #059669;
+  --green5: #10b981;
+  --green6: #34d399;
+  --green7: #6ee7b7;
+  --green8: #a7f3d0;
+  --green: #dde7e0;
+  --green9: #F3F8F5;
+  --lightblack: #F8FAFC;
+  --greengrey: #E1F0E6;
+  --grey1: #F8FAFC;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #f9fdfb;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto; /* keeps aspect ratio */
+}
+
+.practice1 {
+  border: 2px solid var(--green7);
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--green8);
+  max-width: 600px;    /* instead of fixed width */
+  width: 100%;         /* takes full width on smaller screens */
+  box-sizing: border-box;
+  margin: 0 auto;      /* centers it */
+}
+
+
+/* ✅ Mobile adjustments */
+@media (max-width: 600px) {
+  .practice1 {
+    width: 100%;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .practice h2 {
+    font-size: 18px;
+  }
+}

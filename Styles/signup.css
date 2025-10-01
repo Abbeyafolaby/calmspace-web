@@ -1,0 +1,300 @@
+:root{
+    --green1: #064e3b;
+    --green2: #065546;
+    --green3: #047857;
+    --green4: #059669;
+    --green5: #10b981;
+    --green6: #34d399;
+    --green7: #6ee7b7;
+    --green8: #a7f3d0;
+    --green:#dde7e0;
+    --green9:#F3F8F5;
+    --lightblack:#F8FAFC;
+    --greengrey:#E1F0E6;
+    --grey1:#F8FAFC;
+}
+
+/* ===== BASE STYLES ===== */
+body{
+    font-family:sans-serif;
+    background-color:var(--grey1);
+    overflow-x: hidden;
+    margin:0;
+    padding:0;
+}
+
+.sign_section{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:50px;
+    padding:40px;
+    flex-wrap:wrap;
+}
+
+.sections{
+    border: 1px solid grey;
+    box-shadow: 1px 1px grey;
+    border-radius:20px;
+    padding:20px;
+    background-color: white;
+    flex:1 1 400px;
+    max-width:500px;
+    box-sizing: border-box;
+}
+
+.start_text{
+  color:var(--green4);
+  
+  
+}
+
+.start_text1{
+  color:var(--green6)
+}
+
+.sections h1{
+    font-size:30px;
+    letter-spacing: 5px; 
+    margin-bottom:10px;
+}
+.calms {
+    font-size:12px;
+    letter-spacing: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.calms1{
+    font-size:16px;
+    letter-spacing: 2px;
+    font-family:sans-serif;
+    color:var(--green6);
+}
+
+.user_number{
+    display:flex;
+    justify-content:center;
+    /* flex-wrap:wrap; */
+    gap:20px;
+}
+.users{
+    border:2px solid var(--green5);
+    color:white;
+    background-color: #059669;
+    width:160px;
+    border-radius:10px;
+    text-align:left;
+    padding:10px;
+}
+.users h2{
+    font-size:32px;
+    margin:0 0 5px 0;
+}
+.users p{
+    margin:0;
+    font-size:12px;
+}
+
+/* ===== FORM INPUTS ===== */
+input[type=text], 
+.password-container input {
+    width:100%;
+    max-width:100%;
+    height:40px;
+    border-radius:5px;
+    border: 1px solid grey;
+    padding: 0 40px 0 10px;
+    box-sizing:border-box;
+}
+
+.password-container {
+  position: relative;
+  width:100%;
+}
+.password-container .toggle-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.create_button{
+    padding:12px;
+    width:100%;
+    background-color: var(--green7);
+    color:white;
+    font-size:16px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+/* ===== GOOGLE BUTTON ===== */
+/* .google-btn{
+    width:100%;
+    background-color: white;
+    border:2px solid var(--green7);
+    cursor: pointer;
+    border-radius: 5px;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+.google-btn a{
+    text-decoration: none;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.google-btn span{
+    color: var(--green7);
+    font-size:15px;
+} */
+
+.google-btn {
+    width: 95%;
+    background-color: white;
+    border: 2px solid var(--green7);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;  /* ensures link looks like button */
+}
+
+.google-btn span {
+    color: var(--green7);
+    font-size: 15px;
+}
+
+
+
+
+.sign_below p{
+    text-align:center;
+}
+.sign_below a{
+    color:var(--green7);
+}
+
+/* ===== DIVIDER ===== */
+.divider{
+    display:flex;
+    align-items:center;
+    text-align:center;
+    color:#6c757d;
+    font-size:14px;
+    margin:20px 0;
+}
+.divider::before,
+.divider::after{
+    content:"";
+    flex:1;
+    border-bottom:1px solid #ccc;
+}
+.divider:not(:empty)::after{ margin-left:0.7em; }
+.divider:not(:empty)::before{ margin-right:0.7em; }
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .sign_section {
+    gap:30px;
+    padding:20px;
+  }
+  .sections {
+    max-width:450px;
+  }
+}
+
+/* Large phones */
+@media (max-width: 768px) {
+  .sign_section {
+    flex-direction:column;
+    align-items:center;
+  }
+  .sections {
+    width:90%;
+  }
+  .users {
+    width:45%;
+  }
+    .starto{
+    display:none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .sections h1 {
+    font-size:28px;
+    letter-spacing:1px;
+  }
+  .users {
+    width:100%;
+    text-align:center;
+  }
+  .users h2 {
+    font-size:24px;
+  }
+  .calms, .calms1 {
+    letter-spacing:1px;
+    font-size:13px;
+  }
+  .starto{
+    display:none;
+  }
+}
+
+@media (max-width: 360px) {
+  .sections {
+    padding:15px;
+  }
+  .sections h1 {
+    font-size:22px;
+  }
+  .create_button, 
+  .google-btn {
+    font-size:14px;
+    padding:10px;
+  }
+  .user_number{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+  .starto{
+    display:none;
+  }
+}
+
+/* Extra small devices (320px) */
+@media (max-width: 320px) {
+  .sections {
+    padding:15px;
+  }
+  .sections h1 {
+    font-size:22px;
+  }
+  .create_button, 
+  .google-btn {
+    font-size:14px;
+    padding:10px;
+  }
+  .user_number{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+  .starto{
+    display:none;
+  }
+}

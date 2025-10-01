@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meditation Tips</title>
+  <link rel="stylesheet" href="Styles/meditation.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Play Button -->
+    <a href="#" onclick="playAudio(event)" class="play-btn">
+      <img src="https://i.postimg.cc/7hx0XFP8/State-Card-1.png" alt="Play Music">
+    </a>
+
+    <!-- Hidden Audio -->
+    <audio id="myAudio">
+      <source src="https://living-jade-ktakggbrow.edgeone.app/calm-yoga-lofi-peaceful-meditation-beat-247403%20(online-audio-converter.com).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Instructions -->
+    <div class="practice">
+      <h2>How to Practice Box Breathing</h2>
+      <p>1. <b>Inhale</b> slowly through your nose for 4 seconds, filling your lungs with air.</p>
+      <p>2. <b>Hold</b> your breath gently for 4 seconds.</p>
+      <p>3. <b>Exhale</b> slowly through your mouth for 4 seconds, emptying your lungs.</p>
+      <p>4. <b>Rest</b> for 4 seconds before beginning the next cycle.</p>
+
+      <div class="practice1">
+        <p><b>Benefits:</b> Box breathing helps reduce stress, improve focus, and calm your nervous system. Just 5 minutes daily can make a difference.</p>
+      </div>
+    </div>
+
+    <!-- More Meditation Tips -->
+    <div class="tips">
+      <h2>Other Meditation Practices</h2>
+
+      <div class="tip-card">
+        <h3>🌿 Mindful Breathing</h3>
+        <p>Simply observe your breath as it flows in and out. If your mind wanders, gently bring it back to your breath without judgment.</p>
+        <p><b>Benefit:</b> Improves presence, reduces anxiety, and sharpens awareness.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🧘 Body Scan</h3>
+        <p>Close your eyes and slowly bring attention from your head to your toes. Notice areas of tension and allow them to soften.</p>
+        <p><b>Benefit:</b> Releases hidden stress and improves body awareness.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>💖 Gratitude Meditation</h3>
+        <p>Think of 3 things you’re grateful for today. Breathe deeply and visualize those positive moments filling your heart with warmth.</p>
+        <p><b>Benefit:</b> Builds positivity, inner peace, and emotional balance.</p>
+      </div>
+
+      <div class="tip-card">
+        <h3>🌙 Evening Reflection</h3>
+        <p>Before bed, sit quietly and reflect on your day. Let go of worries and focus on peaceful thoughts for restful sleep.</p>
+        <p><b>Benefit:</b> Improves sleep quality and reduces nighttime stress.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function playAudio(event) {
+      event.preventDefault(); 
+      const audio = document.getElementById("myAudio");
+
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>

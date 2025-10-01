@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calm Guide</title>
+  <link rel="stylesheet" href="Styles/guide.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/ZR78xV40/Frame-1984078010.png" alt="Calm Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="landing.html">Home</a></li>
+      <li class="active"><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="the_about.html">About Us</a></li>
+      <li><a href="the_contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-icon" id="menu-icon">
+      <img src="https://i.postimg.cc/5yp2CRVk/Container.png" alt="Menu">
+    </div>
+  </nav>
+
+  <!-- Guide Session -->
+  <section class="guide-session">
+    <h4>Guided Sessions</h4>
+    <button class="filter-btn">
+      <img src="https://i.postimg.cc/Qdc1Bjz6/filter.png" alt="Filter">
+      <span>Filter</span>
+    </button>
+  </section>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" placeholder="Search Sessions...">
+  </div>
+
+  <!-- Activities -->
+  <section class="activities">
+    <div class="activity"><a href="meditation.html"><img src="https://i.postimg.cc/nLWXWSSD/heart-2.png" alt=""> Meditation</a></div>
+    <div class="activity"><a href="the_breathing.html"><img src="https://i.postimg.cc/RCYNVYvp/cloud.png" alt=""> Breathing</a></div>
+    <div class="activity"><a href="journaling.html"><img src="https://i.postimg.cc/YCr9XBR9/journal.png" alt="">Journaling </a></div>
+    <div class="activity"><a href="sleep.html"><img src="https://i.postimg.cc/T1TMRfp5/moon.png" alt=""> Sleep</a></div>
+    <div class="activity"><a href="sound.html"><img src="https://i.postimg.cc/90sddFZr/music-sign.png" alt=""> Sound Therapy</a></div>
+    <div class="activity"><a href="mood.html"><img src="https://i.postimg.cc/GtDQSyck/smile.png" alt=""> Mood Boosters</a></div>
+  </section>
+
+  <!-- Calm Sections -->
+  <section class="calm-sections">
+    <a href="the_1.html"><img src="https://i.postimg.cc/7hx0XFP8/State-Card-1.png" alt=""></a>
+    <a href="the_2.html"><img src="https://i.postimg.cc/W37JD5G9/State-Card-2.png" alt=""></a>
+    <a href="the_3.html"><img src="https://i.postimg.cc/Gt294dh2/State-Card-3.png" alt=""></a>
+    <a href="the_4.html"><img src="https://i.postimg.cc/Sx0NhW8j/State-Card-4.png" alt=""></a>
+    <a href="the_5.html"><img src="https://i.postimg.cc/m27hhXT7/State-Card-5.png" alt=""></a>
+    <a href="the_6.html"><img src="https://i.postimg.cc/65hwDD9b/State-Card-6.png" alt=""></a>
+    <a href="the.7.html"><img src="https://i.postimg.cc/25ZtfZQj/State-Card-7.png" alt=""></a>
+    <a href="the_8.html"><img src="https://i.postimg.cc/MKHdSBxk/State-Card-8.png" alt=""></a>
+  </section>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuIcon.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+  async function fetchUserData() {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      console.log("No token found, user not logged in.");
+      return;
+    }
+
+    try {
+      const res = await fetch("https://calmspace-api.onrender.com/api/user/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch user data");
+      }
+
+      const data = await res.json();
+      console.log("User data:", data);
+
+      // Example: show user's name on page
+      document.getElementById("userName").textContent = data.fullname;
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  // Call it automatically on page load
+  fetchUserData();
+  </script>
+
+</body>
+</html>

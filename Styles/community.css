@@ -1,0 +1,747 @@
+:root {
+  --primary-color: #ffffff; /* white text */
+  --highlight-color:; /* green highlight */
+  --bg-dark: #000000; /* fallback background */
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color:  #F3F8F5;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+.hero {
+color:#8FC3A4
+}
+.hero ul li a{
+  color:rgba(0, 0, 0, 0.87)
+}
+/* Navbar */
+nav {
+   position: relative;
+  padding: 20px 20px; /* Adjust padding for mobile */
+  margin-top: -20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+ul li a:hover,
+ul li a.active {
+  color: var(--highlight-color);
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icons img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.icons {
+  cursor: pointer;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the space between the image and icon */
+  padding: 20px;
+}
+
+.profile img {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  border-radius: 5%; /* This is what makes it a circle */
+  object-fit: cover; /* Ensures the image fills the circle without distortion */
+  margin-bottom: -15px;
+}
+
+.diamond-icon img {
+  width: 10px; /* Adjust size as needed */
+  height: 15px;
+}
+.hamburger {
+  display: none;     /* Hidden by default */
+
+}
+
+/* --- Section Styles community--- */
+.community-section h2 {
+    font-size: 24px;
+    margin-bottom: 6px;
+    color: #334155;
+    margin-left: 105px;
+}
+
+.community-section p{
+   margin-left: 105px;
+}
+
+.community-section .subtitle {
+    font-size: 16px;
+    color: #6b6b6b;
+    margin-bottom: 25px;
+}
+
+/* --- Guidelines Card --- */
+.guidelines-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 25px;
+    margin: 20px;
+    display: flex;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    width: 90%;
+    margin-left: 100px;
+}
+
+/* --- Icon Circle --- */
+.guidelines-card .icon {
+    background-color: #8FC3A4; /* pale green circle */
+    color: #F3F8F5;            /* green text */
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+/* --- Text Content --- */
+.guidelines-content h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    color: #2c2c2c;
+}
+
+.guidelines-content p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #555;
+    
+}
+
+/* --- Link --- */
+.read-more {
+    text-decoration: none;
+    color: #64748B;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+/*groups & discussion*/
+.top-nav {
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+.top-nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.top-nav li {
+    margin-right: 30px;
+    padding: 15px 0;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+}
+.top-nav li.active {
+    color: #2e7d32; /* green highlight */
+    border-bottom: 2px solid #2e7d32;
+}
+
+/* ===== New Post Button ===== */
+.new-post-container {
+    margin: 20px 0;
+}
+.new-post-btn {
+    background-color: #a5d6a7;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 100px;;
+}
+.new-post-btn:hover {
+    background-color: #81c784;
+}
+
+/* ===== Post Card ===== */
+.post-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.post-user {
+    flex: 1;
+    margin-left: 10px;
+}
+.username {
+    margin: 0;
+    font-size: 16px;
+}
+.time {
+    font-size: 13px;
+    color: #777;
+}
+.menu-dots {
+    cursor: pointer;
+    font-size: 20px;
+    color: #aaa;
+}
+
+/* ===== Post Text ===== */
+.post-text {
+    margin: 15px 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #64748B;
+}
+
+/* ===== Tags ===== */
+.tags {
+    margin-bottom: 15px;
+}
+.tag {
+    display: inline-block;
+    background: #e0f2e9;
+    color: #2e7d32;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-right: 6px;
+}
+
+/* ===== Post Actions ===== */
+.post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.post-actions .comments{
+    margin-right: 1500px;
+}
+.likes, .comments, .share-save {
+    display: flex;
+    gap: 10px;
+}
+.share-save span {
+    cursor: pointer;
+}
+
+/* ===== Comments ===== */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    background: #f1f8f5;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+   
+}
+.comment-content {
+    margin-left: 10px;
+}
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.comment-header .time {
+    color: #777;
+    font-size: 12px;
+}
+.comment p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* ===== Add Comment ===== */
+.add-comment {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+.add-comment input {
+    flex: 1;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    background: white;
+    height: 50px;
+    outline: 
+}
+.avatar {
+    border-radius: 50%;
+}
+
+/* ===== social media  ===== */
+
+
+    .social-apps {
+        display: inline;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 12px;
+      margin-left: 100px;
+      margin-top:40px ;
+      width:1710px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .social-apps h3 {
+      color: #64748B;
+      margin: 0 0 15px;
+      font-size: 18px;
+      font-weight: 600;
+      margin-left: -63%;
+    }
+
+    .share-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .icon img{
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .link-box {
+        background-color: #F3F8F5;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 14px;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .link-box span {
+      color: #64748B;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 200px;
+    }
+
+    .cancel-btn {
+      width: 100%;
+      padding: 12px;
+      background: #f2f2f2;
+      border: 1px solid #A8D5BA;
+      color: #2E7D32;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+
+    /* For screens up to 390px wide */
+
+@media (max-width: 768px) {
+    
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 25px;
+}
+  /* ===== Community Section ===== */
+  .community-section h2 {
+    font-size: 20px;
+    margin-left: 20px;       /* reduce large left margin */
+    margin-bottom: 10px;
+  }
+
+  .community-section p,
+  .community-section .subtitle {
+    margin-left: 22px;
+    font-size: 14px;
+  }
+
+  .community-section p{
+        margin-left: 2px;
+  }
+  /* ===== Guidelines Card ===== */
+  .guidelines-card {
+    width: 95%;
+    margin-left: auto;       /* center horizontally */
+    margin-right: auto;
+    padding: 15px;
+    flex-direction: column;  /* stack icon/text if needed */
+    align-items: flex-start;
+  }
+
+  .guidelines-card .icon {
+    margin-bottom: 10px;     /* spacing when stacked */
+  }
+
+  /* ===== Groups & Discussion ===== */
+  .top-nav {
+    margin-left: 0;          /* remove fixed margin */
+    margin-bottom: 15px;
+  }
+
+  .top-nav ul {
+    flex-wrap: wrap;         /* allow nav items to wrap */
+    justify-content: center;
+  }
+
+  .top-nav li {
+    margin: 10px;
+    padding: 10px 0;
+    font-size: 15px;
+  }
+
+  .new-post-btn {
+    margin-left: 20px;       /* reduce large left margin */
+  }
+
+  .post-card {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== Post Actions ===== */
+  .post-actions .comments {
+    margin-right: 0;         /* prevent huge spacing */
+  }
+
+  /* ===== Social Media Box ===== */
+  .social-apps {
+    display: block;          /* easier to center */
+    width: 95%;
+    margin: 30px auto 0;     /* center and reduce top margin */
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .social-apps h3 {
+    margin-left: 0;          /* remove negative margin */
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .share-options {
+    grid-template-columns: repeat(2, 1fr); /* reduce columns for tablets */
+    gap: 15px;
+  }
+
+  .icon img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .link-box {
+    flex-direction: row ;  /* stack text/button if space is tight */
+    align-items: flex-start;
+    font-size: 13px;
+  }
+
+  .link-box span {
+    max-width: 100%;
+  }
+
+  .cancel-btn {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 390px) {
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav ul {
+    display: none; /* hide nav links by default */
+    flex-direction: column;
+    gap: 12px;
+    background: rgb(41, 48, 32); /* adjust color */
+    position: absolute;
+    top: 60px;  /* below navbar */
+    left: 0;
+    width: 100%;
+    padding: 15px;
+  }
+
+  nav ul.active {
+    display: flex; /* show when toggled */
+  }
+  
+
+  .hamburger {
+    margin-bottom: -97px;
+    display: block;           /* show hamburger */
+    font-size: 22px;          /* make icon bigger */
+    cursor: pointer;
+  }
+
+  .icons {
+    display: none; /* hide profile/notification on small screens */
+  }  
+
+  .logo{
+    margin-left: -30px;
+    margin-bottom: -80px;
+  }
+
+  .hero-content h1{
+    font-size: 25px;
+    br{
+      display: none;
+    }
+  }
+  .hero-content p{
+    font-size: 14px;
+  }
+
+  /*community section*/
+
+  .community-section h2 {
+    font-size: 16px;
+    margin-top: 40px;
+   text-align: center; 
+   margin-left: -279px;   /* remove fixed left margin */
+    margin-top: 90px;   /* reduce or remove right margin */
+  /* optional, for better fit */
+  }
+
+  .community-section p {
+    margin-left: 0;       /* remove fixed left margin */
+    font-size: 11px;
+    margin-left: 14px;
+     /* optional */
+  }
+
+  .community-section .subtitle {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .guidelines-card {
+    width: 100%;
+    margin: 15px 0;       /* no large left margin */
+    padding: 15px;
+    flex-direction: column; /* stack icon and text vertically if needed */
+    align-items: center;    /* center content for small screens */
+  }
+
+  .guidelines-card .icon {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+    margin: 0 0 10px;     /* space below icon when stacked */
+  }
+
+  .guidelines-content h3 {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .guidelines-content p {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .guidelines-content a{
+    margin-left: 120px;
+  }
+  .read-more {
+    font-size: 13px;
+  }
+
+  /*groups & discussion*/
+  .top-nav {
+    border-bottom: none;
+    margin-left: 100;          /* remove the 50px left margin */
+    margin-bottom: 10px;     /* tighten vertical spacing if desired */
+ 
+  }
+
+  .top-nav ul {
+    background-color: #F3F8F5;
+    flex-direction: row;  /* stack items horizontally */
+     /* center the stacked items */
+  }
+
+  .top-nav li {
+    margin: 8px 0;           /* vertical spacing between links */
+    padding: 10px 0;
+    font-size: 14px;         /* slightly smaller text */
+  }
+
+  .top-nav li.active {
+    border-bottom: none;     /* optional: remove underline */
+    color: #2e7d32;          /* keep green highlight */
+  }
+
+  .post-card {
+    width: 100%;
+    margin: 20px 0;          /* remove large left margin */
+    padding: 35px;
+  }
+  .comments{
+    margin-left: 20px;
+  }
+  /*socail-media*/
+  .social-apps {
+    display: block;          /* inline won't scale well on small screens */
+    margin-left: 0;           /* remove large left margin */
+    margin-top: 20px;
+    width: 100%;              /* let it shrink to fit the viewport */
+    padding: 15px;
+    box-sizing: border-box;   /* include padding in width */
+  }
+
+  .social-apps h3 {
+    margin-left: 0;           /* remove negative margin */
+    font-size: 16px;
+    text-align: center;       /* center the heading */
+  }
+
+  .share-options {
+    grid-template-columns: repeat(2, 1fr); /* reduce columns to 2 for better fit */
+    gap: 15px;
+  }
+
+  .share-save img{
+   display: none;
+  }
+
+  .option {
+    font-size: 13px;
+  }
+
+  .icon img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+
+  .link-box {
+    flex-direction: column;   /* stack link text and buttons if needed */
+    align-items: flex-start;
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .link-box button {
+    margin-top: 18px;         /* space above button when stacked */
+  }
+
+  .link-box span {
+    max-width: 100%;         
+  }
+
+  .cancel-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
