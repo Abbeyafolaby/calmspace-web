@@ -3,78 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Journaling Guide</title>
-  <link rel="stylesheet" href="Styles/journaling.css">
+  <title>Calm Guide</title>
+  <link rel="stylesheet" href="Styles/guide.css">
 </head>
 <body>
 
-  <div class="container">
-    <!-- Play Button -->
-    <a href="#" onclick="playAudio(event)" class="play-btn">
-      <img src="https://i.postimg.cc/ydqkYYsD/journaling.png" alt="Play Relaxing Music">
-    </a>
-
-    <!-- Hidden Audio -->
-    <audio id="myAudio">
-      <source src="https://living-jade-ktakggbrow.edgeone.app/relaxing-journal-music.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- Journaling Guide -->
-    <div class="practice">
-      <h2>How to Start Journaling</h2>
-      <p>1. <b>Find a quiet space</b> where you won’t be disturbed.</p>
-      <p>2. <b>Set a timer</b> for 5–10 minutes to keep your practice simple.</p>
-      <p>3. <b>Write freely</b> without worrying about grammar or structure.</p>
-      <p>4. <b>Reflect</b> on your emotions, thoughts, or events of the day.</p>
-      <p>5. End with a <b>positive note</b> — gratitude, an affirmation, or a hopeful thought.</p>
-
-      <div class="practice1">
-        <p><b>Benefits:</b> Journaling improves self-awareness, reduces stress, helps process emotions, and strengthens clarity in decision-making.</p>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/ZR78xV40/Frame-1984078010.png" alt="Calm Logo">
     </div>
-
-    <!-- More Journaling Tips -->
-    <div class="tips">
-      <h2>Journaling Prompts & Techniques</h2>
-
-      <div class="tip-card">
-        <h3>📝 Gratitude Journal</h3>
-        <p>Write down 3 things you’re grateful for each day.</p>
-        <p><b>Benefit:</b> Builds positivity and rewires your brain to focus on joy.</p>
-      </div>
-
-      <div class="tip-card">
-        <h3>🌅 Morning Pages</h3>
-        <p>Write 1–2 pages of unfiltered thoughts first thing in the morning.</p>
-        <p><b>Benefit:</b> Clears mental clutter and sparks creativity.</p>
-      </div>
-
-      <div class="tip-card">
-        <h3>🌙 Evening Reflection</h3>
-        <p>Record your highlights, lessons, and challenges of the day.</p>
-        <p><b>Benefit:</b> Encourages mindfulness and better sleep.</p>
-      </div>
-
-      <div class="tip-card">
-        <h3>💡 Prompt Journaling</h3>
-        <p>Examples: “What made me smile today?” or “What do I need to let go of?”</p>
-        <p><b>Benefit:</b> Unlocks deeper insights and emotional release.</p>
-      </div>
+    <ul class="nav-links">
+      <li><a href="landing.html">Home</a></li>
+      <li class="active"><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="the_about.html">About Us</a></li>
+      <li><a href="the_contact.html">Contact</a></li>
+    </ul>
+    <div class="menu-icon" id="menu-icon">
+      <img src="https://i.postimg.cc/5yp2CRVk/Container.png" alt="Menu">
     </div>
+  </nav>
+
+  <!-- Guide Session -->
+  <section class="guide-session">
+    <h4>Guided Sessions</h4>
+    <button class="filter-btn">
+      <img src="https://i.postimg.cc/Qdc1Bjz6/filter.png" alt="Filter">
+      <span>Filter</span>
+    </button>
+  </section>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input type="text" placeholder="Search Sessions...">
   </div>
 
-  <script>
-    function playAudio(event) {
-      event.preventDefault(); 
-      const audio = document.getElementById("myAudio");
+  <!-- Activities -->
+  <section class="activities">
+    <div class="activity"><a href="meditation.html"><img src="https://i.postimg.cc/nLWXWSSD/heart-2.png" alt=""> Meditation</a></div>
+    <div class="activity"><a href="the_breathing.html"><img src="https://i.postimg.cc/RCYNVYvp/cloud.png" alt=""> Breathing</a></div>
+    <div class="activity"><a href="journaling.html"><img src="https://i.postimg.cc/YCr9XBR9/journal.png" alt="">Journaling </a></div>
+    <div class="activity"><a href="sleep.html"><img src="https://i.postimg.cc/T1TMRfp5/moon.png" alt=""> Sleep</a></div>
+    <div class="activity"><a href="sound.html"><img src="https://i.postimg.cc/90sddFZr/music-sign.png" alt=""> Sound Therapy</a></div>
+    <div class="activity"><a href="mood.html"><img src="https://i.postimg.cc/GtDQSyck/smile.png" alt=""> Mood Boosters</a></div>
+  </section>
 
-      if (audio.paused) {
-        audio.play();
-      } else {
-        audio.pause();
-      }
-    }
-  </script>
+  <!-- Calm Sections -->
+  <section class="calm-sections">
+   
+    <a href="journal_session.html"><img src="https://i.postimg.cc/MKHdSBxk/State-Card-8.png" alt=""></a>
+  </section>
+
+ 
 
 </body>
 </html>

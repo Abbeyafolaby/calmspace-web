@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Music Player</title>
+  <link rel="stylesheet" href="Styles/bodyscan.css">
+</head>
+<body>
+
+  <div class="player">
+    <img id="music-img" src="https://i.postimg.cc/1Xg1cj9C/Container-1.png" alt="Music Cover" style="height:500px;width:500px">
+    <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+  </div>
+
+  <script>
+    const music = document.getElementById("music");
+    const musicImg = document.getElementById("music-img");
+
+    musicImg.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        musicImg.classList.add("playing");
+      } else {
+        music.pause();
+        musicImg.classList.remove("playing");
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -6,7 +6,6 @@
     <title>CalmSpace_Privacy</title>
     <link rel="stylesheet" href="Styles/privacy.css">
     <link rel="icon" type="image/jpeg" href="https://i.postimg.cc/g0SwLJLZ/Calmspace-Logo.png">
-    
 </head>
 <body>
     <div class="privacy_policy">
@@ -14,10 +13,19 @@
              <img src="https://i.postimg.cc/GmZXhqQV/Frame-1984078010.png" alt="" id="logogo">
         </div>
         <div class="pp calmspa2">
-            <img src="https://i.postimg.cc/X7WRRJRS/menu-1.png" alt="" >
+            <img src="https://i.postimg.cc/X7WRRJRS/menu-1.png" alt="menu" id="menu-icon">
         </div>
-
     </div>
+
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="the_about.html">About</a></li>
+        <li><a href="the_guide.html">Guide</a></li>
+      </ul>
+    </nav>
+
     <div class="privacy_section">
         <div class="privacy top">
             <h1>Privacy Policy</h1>
@@ -30,9 +38,8 @@
             <p>We use secure encryption and industry-standard practices to protect your data.You are in control of your information and <br>may request account deletion at any time.</p><br>
             <p>4. <b>Your rights</b></p>
             <p>You have the right to access,edit or delete your personal data. For questions,please contact us at <br>support@calmspace.com.</p>
-
-
         </div>
+
         <div class="privacy middle">
             <h1>Terms of Service</h1><br>
             <p>1.<b>Use of Service</b></p>
@@ -46,40 +53,43 @@
             <p>5. <b>Termination</b></p>
             <p>We reserve the right to suspend or terminate accounts that misuse CalmSpace or violate these terms.</p><br>
             <p>For questions, contact us at support@calmspace.com.</p>
-
-
         </div>
+
         <div class="privacy down">
             <h1>Fill Out this Quick Form:</h1>
             <label for="">Fullname</label>
-            <input type="text" name="" id="" placeholder="Enter your fullname here">
+            <input type="text" placeholder="Enter your fullname here">
             <label for="">Email</label>
-            <input type="text" name="" id="" placeholder="Enter your email here">
+            <input type="text" placeholder="Enter your email here">
 
             <label for="phone">Phone Number</label>
             <div class="phone-input">
-    <select>
-        
-      <option value="+1">🇺🇸 +1</option>
-      <option value="+44">🇬🇧 +44</option>
-      <option value="+234">🇳🇬 +234</option>
-      <option value="+91">🇮🇳 +91</option>
-    </select>
-    <input type="tel" placeholder="(669) 123 4245">
-  </div><br>
+              <select>
+                <option value="+1">🇺🇸 +1</option>
+                <option value="+44">🇬🇧 +44</option>
+                <option value="+234">🇳🇬 +234</option>
+                <option value="+91">🇮🇳 +91</option>
+              </select>
+              <input type="tel" placeholder="(669) 123 4245">
+            </div><br>
 
-  <div class="form-group">
-    <label for="message">Message</label>
-    <textarea id="message" placeholder="Enter your message here"></textarea>
-    <input type="checkbox" name="" id=""> <span>By checking this box,you agree to our <a href="#"> Terms of Services</a> and <a href="#">Privacy Policy</a> </span>
-  </div><br>
-            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Enter your message here"></textarea>
+              <input type="checkbox"> <span>By checking this box,you agree to our <a href="#"> Terms of Services</a> and <a href="#">Privacy Policy</a> </span>
+            </div><br>
         </div>
-
-          
- 
     </div>
 
-    
+    <!-- JavaScript for Toggle -->
+    <script>
+      const menuIcon = document.getElementById("menu-icon");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuIcon.addEventListener("click", () => {
+        mobileMenu.style.display =
+          mobileMenu.style.display === "block" ? "none" : "block";
+      });
+    </script>
 </body>
 </html>

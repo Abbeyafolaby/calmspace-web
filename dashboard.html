@@ -3,126 +3,530 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calmspace Dashboard</title>
+  <title>Document</title>
   <link rel="stylesheet" href="Styles/dashboard.css">
 </head>
 <body>
-  <div class="container">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <!-- Sidebar Header -->
-      <div class="sidebar-header">
-        <div class="logo">
-          <img src="https://i.postimg.cc/Kvg2rtgc/Calmspace-Logo.png" alt="Calmspace Logo">
-          <h2>Calmspace</h2>
-        </div>
-        <!-- Hamburger Button -->
-        <button class="hamburger" id="menuToggle">☰</button>
-      </div>
-
-      <nav>
-        <ul id="menuList">
-          <li class="active">Dashboard</li>
-          <li><a href="features.html"><img src="https://i.postimg.cc/RhSnfz9j/application.png" alt="">Features</a></li>
-          <li><a href="pricing.html"><img src="https://i.postimg.cc/8CScWHPW/coin.png" alt="">Pricing</a></li>
-          <li><a href="the_about.html"><img src="https://i.postimg.cc/h459mkFd/user-4.png" alt="">About Us</a></li>
-          <li><a href="the_contact.html"><img src="https://i.postimg.cc/mZHrdJzM/phone-call.png" alt="">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="sidebar-footer">
-        <p>Settings</p>
-        <button class="signout" id="logoutBtn">Sign Out</button>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main">
-      <header class="header">
-        <h2>Dashboard Overview</h2>
-        <p>Hello <span id="userNickname">User</span>!</p>
-      </header>
-
-      <section class="quote card">
-        <blockquote>"Rest is not weakness, it’s renewal."</blockquote>
-        <small>Reframes rest as a form of strength and self-care...</small>
-        <a href="sleep.html">See more quotes →</a>
-      </section>
-
-      <section class="reflection-schedule">
-        <div class="reflection card">
-          <h3>Daily Reflection</h3>
-          <ul>
-            <li>“What three things am I grateful for today?” <span>5 min</span></li>
-            <li>“What emotion stood out the most for me today?” <span>10 min</span></li>
-            <li>“What is one small win I achieved today?” <span>10 min</span></li>
-          </ul>
-        </div>
-        <div class="schedule card">
-          <h3>Daily Schedule</h3>
-          <ul>
-            <li>Breathing exercise <span>5 min</span></li>
-            <li>Yoga <span>15 min</span></li>
-            <li>Music listening <span>20 min</span></li>
-            <li>Journaling session <span>15 min</span></li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="activities card">
-        <h3>Week Activities</h3>
-        <p>Total number of minutes: <strong>4,500</strong></p>
-        <div class="chart-container">
-          <canvas id="activityChart"></canvas>
-        </div>
-      </section>
-
-      <section class="mood-tracker card">
-        <h3>Mood Tracker - Year 2025</h3>
-        <div class="filters">
-          <button class="active">12 months</button>
-          <button>6 months</button>
-          <button>30 Days</button>
-          <button>7 Days</button>
-        </div>
-        <div class="chart-container">
-          <canvas id="moodChart"></canvas>
-        </div>
-      </section>
-
-      <section class="calendar-sessions">
-        <div class="calendar card">
-          <h3>February 2025</h3>
-          <div id="calendar"></div>
-        </div>
-        <div class="sessions card">
-          <h3>Guided Sessions</h3>
-          <ul>
-            <li><strong>Breathe Away Stress</strong> - 50:07</li>
-            <li><strong>Drift Into Sleep</strong> - 09:12</li>
-            <li><strong>Morning Clarity</strong> - 12:09</li>
-            <li><strong>Checking In</strong> - 10:45</li>
-            <li><strong>Building Your Calm Routine</strong> - 24:32</li>
-            <li><strong>From Anxious to Aware</strong> - 17:06</li>
-          </ul>
-        </div>
-      </section>
-    </main>
+  <div class="header">
+    <button class="menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <div class="header-title">Dashboard Overview</div>
+    <div class="header-right">
+      <button class="icon-btn">🔔</button>
+      <div class="avatar">A</div>
+    </div>
   </div>
 
-  <!-- Chart.js and dashboard logic -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="js/dashboard.js"></script>
-  
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-list">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="features.html">Features</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="the_about.html">About Us</a></li>
+      <li><a href="the_contact.html">Contact</a></li>
+      
+    </ul>
+  </div>
 
-  <!-- Toggle Menu Script -->
+  <div class="container">
+    <h1 class="greeting">Hello Alex!</h1>
+
+    <div class="dashboard-grid">
+      <div class="card quote-card">
+        <div class="quote-text">"Rest is not weakness, it's renewal."</div>
+        <div class="quote-author">Reframes rest as a form of...</div>
+        <button class="more-quotes-btn" onclick="changeQuote()"><a href="">See more quotes➡</a></button>
+      </div>
+
+      <div class="card reflection-card">
+        <div class="card-header">
+          <span class="card-title">Daily Reflection</span>
+          <a href="#" class="see-more">see more</a>
+        </div>
+        <div id="reflectionList"></div>
+      </div>
+
+      <div class="card schedule-card">
+        <div class="card-header">
+          <span class="card-title">Daily Schedule</span>
+          <a href="#" class="see-more">see more</a>
+        </div>
+        <div id="scheduleList"></div>
+      </div>
+    </div>
+
+    <div class="card week-activities">
+      <div class="card-header">
+        <span class="card-title">Week Activities</span>
+      </div>
+      <div class="chart-header">
+        <div class="chart-stats">
+          <span>Total number of minutes: <strong>4,500</strong></span>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="activityChart" class="chart-canvas"></canvas>
+      </div>
+      <div class="chart-legend">
+        <div>Yoga</div>
+        <div>Journaling</div>
+        <div>Breathing</div>
+        <div>Music</div>
+        <div>Therapy</div>
+        <div>Tracking</div>
+      </div>
+    </div>
+
+    <div class="bottom-grid">
+      <div class="card calendar-card">
+        <div class="calendar-header">
+          <span class="card-title" id="calendarMonth">October 2025</span>
+          <div class="calendar-nav">
+            <button onclick="changeMonth(-1)">←</button>
+            <button onclick="changeMonth(1)">→</button>
+          </div>
+        </div>
+        <div class="calendar-grid" id="calendar"></div>
+      </div>
+
+      <div>
+        <div class="card mood-tracker">
+          <div class="mood-header">
+            <span class="card-title">Mood Tracker</span>
+            <div class="mood-controls">
+              <button class="mood-btn active" onclick="changeMoodView('6months')">6 months</button>
+              <button class="mood-btn" onclick="changeMoodView('30days')">30 days</button>
+            </div>
+          </div>
+          <div class="mood-list">
+            <div class="mood-emoji">😊</div>
+            <div class="mood-emoji">😊</div>
+            <div class="mood-emoji">😊</div>
+            <div class="mood-emoji">😐</div>
+            <div class="mood-emoji">😊</div>
+          </div>
+          <div class="mood-chart">
+            <canvas id="moodChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card guided-sessions" style="margin-top: 1.5rem;">
+          <div class="card-header">
+            <span class="card-title">Guided Sessions</span>
+            <a href="#" class="see-more">see more</a>
+          </div>
+          <div id="sessionsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    const menuToggle = document.getElementById("menuToggle");
-    const menuList = document.getElementById("menuList");
+    // Data
+    const quotes = [
+      { text: '"Rest is not weakness, it\'s renewal."', author: 'Reframes rest as a form of...' },
+      { text: '"Progress, not perfection."', author: 'Embracing the journey of growth...' },
+      { text: '"You are stronger than you think."', author: 'Building inner resilience...' },
+      { text: '"One day at a time."', author: 'The power of present moment...' }
+    ];
 
-    menuToggle.addEventListener("click", () => {
-      menuList.classList.toggle("show");
+    const reflections = [
+      { question: 'What three things am I grateful for today?', time: '8 minutes' },
+      { question: 'What emotion stood out the most for today?', time: '5 minutes' },
+      { question: 'What is one small win I achieved today?', time: '3 minutes' }
+    ];
+
+    const schedule = [
+      { title: 'Breathing exercise', time: '30 minutes' },
+      { title: 'Yoga', time: '45 minutes' },
+      { title: 'Music listening', time: '20 minutes' },
+      { title: 'Meditation session', time: '15 minutes' }
+    ];
+
+    const sessions = [
+      { 
+        title: 'Breathe Away Stress', 
+        author: 'by Isabella Thompson', 
+        duration: 352,
+        audioUrl: 'https://living-jade-ktakggbrow.edgeone.app/calm-yoga-lofi-peaceful-meditation-beat-247403%20(online-audio-converter.com).mp3'
+      },
+      { 
+        title: 'Drift Into Sleep', 
+        author: 'by Amani Okafor', 
+        duration: 186,
+        audioUrl: 'https://operational-yellow-pzor5q1akr.edgeone.app/slowlife.mp3'
+      },
+      { 
+        title: 'Morning Clarity', 
+        author: 'by Sofia Garcia', 
+        duration: 240,
+        audioUrl: 'https://orthodox-scarlet-fur8jrr6ac.edgeone.app/embracingthesky.mp3'
+      },
+      { 
+        title: 'Quiet the Mind', 
+        author: 'by James Liu', 
+        duration: 330,
+        audioUrl: 'https://related-silver-ur8kqpycwe.edgeone.app/inspire.mp3'
+      },
+      { 
+        title: 'Finding Your Calm Routine', 
+        author: 'by Maria Santos', 
+        duration: 300,
+        audioUrl: 'https://operational-yellow-pzor5q1akr.edgeone.app/slowlife.mp3'
+      },
+      { 
+        title: 'From Anxious to Aware', 
+        author: 'by Monifa Robson', 
+        duration: 420,
+        audioUrl: 'https://orthodox-scarlet-fur8jrr6ac.edgeone.app/embracingthesky.mp3'
+      }
+    ];
+
+    // Get current date
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    let currentDay = today.getDate();
+    
+    let currentAudio = null;
+    let currentPlayingIndex = -1;
+
+    // Format time helper
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    // Initialize reflection list
+    function initReflections() {
+      const list = document.getElementById('reflectionList');
+      reflections.forEach(item => {
+        list.innerHTML += `
+          <div class="reflection-item">
+            <div class="reflection-question">${item.question}</div>
+            <div class="reflection-time">${item.time}</div>
+          </div>
+        `;
+      });
+    }
+
+    // Initialize schedule list
+    function initSchedule() {
+      const list = document.getElementById('scheduleList');
+      schedule.forEach(item => {
+        list.innerHTML += `
+          <div class="schedule-item" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div class="schedule-title">${item.title}</div>
+              <div class="schedule-time">${item.time}</div>
+            </div>
+            <button class="menu-dots">⋯</button>
+          </div>
+        `;
+      });
+    }
+
+    // Initialize sessions list with audio functionality
+    function initSessions() {
+      const list = document.getElementById('sessionsList');
+      
+      sessions.forEach((item, index) => {
+        const sessionDiv = document.createElement('div');
+        sessionDiv.className = 'session-item';
+        sessionDiv.innerHTML = `
+          <div class="session-info">
+            <h4>${item.title}</h4>
+            <div class="session-author">${item.author}</div>
+            <div class="progress-bar" data-index="${index}">
+              <div class="progress-fill" id="progress-${index}"></div>
+            </div>
+          </div>
+          <div class="session-controls">
+            <div class="session-time-display">
+              <span class="time-current" id="current-${index}">0:00</span>
+              <span class="time-total">${formatTime(item.duration)}</span>
+            </div>
+            <button class="play-btn" data-index="${index}">▶</button>
+          </div>
+        `;
+        
+        list.appendChild(sessionDiv);
+      });
+
+      // Add event listeners
+      document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', handlePlayPause);
+      });
+
+      document.querySelectorAll('.progress-bar').forEach(bar => {
+        bar.addEventListener('click', handleProgressClick);
+      });
+    }
+
+    // Handle play/pause
+    function handlePlayPause(e) {
+      const index = parseInt(e.target.dataset.index);
+      const btn = e.target;
+
+      // If clicking the same session that's playing, pause it
+      if (currentPlayingIndex === index && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        return;
+      }
+
+      // Stop current audio if playing
+      if (currentAudio) {
+        currentAudio.pause();
+        if (currentPlayingIndex >= 0) {
+          const oldBtn = document.querySelector(`.play-btn[data-index="${currentPlayingIndex}"]`);
+          if (oldBtn) {
+            oldBtn.textContent = '▶';
+            oldBtn.classList.remove('playing');
+          }
+        }
+      }
+
+      // Create new audio or resume
+      if (currentPlayingIndex !== index) {
+        currentAudio = new Audio(sessions[index].audioUrl);
+        currentAudio.addEventListener('loadedmetadata', () => {
+          sessions[index].duration = currentAudio.duration;
+          const totalTimeEl = document.querySelector(`#current-${index}`).nextElementSibling;
+          if (totalTimeEl) {
+            totalTimeEl.textContent = formatTime(currentAudio.duration);
+          }
+        });
+      }
+
+      currentPlayingIndex = index;
+      currentAudio.play();
+      btn.textContent = '⏸';
+      btn.classList.add('playing');
+
+      // Update progress
+      currentAudio.addEventListener('timeupdate', () => {
+        updateProgress(index);
+      });
+
+      // Handle end of audio
+      currentAudio.addEventListener('ended', () => {
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        document.getElementById(`progress-${index}`).style.width = '0%';
+        document.getElementById(`current-${index}`).textContent = '0:00';
+      });
+    }
+
+    // Update progress bar and time
+    function updateProgress(index) {
+      if (currentAudio) {
+        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+        document.getElementById(`progress-${index}`).style.width = progress + '%';
+        document.getElementById(`current-${index}`).textContent = formatTime(currentAudio.currentTime);
+      }
+    }
+
+    // Handle progress bar click (seek)
+    function handleProgressClick(e) {
+      const index = parseInt(e.currentTarget.dataset.index);
+      
+      if (currentPlayingIndex === index && currentAudio) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        currentAudio.currentTime = percentage * currentAudio.duration;
+      }
+    }
+
+    // Change quote
+    let currentQuoteIndex = 0;
+    function changeQuote() {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      const quote = quotes[currentQuoteIndex];
+      document.querySelector('.quote-text').textContent = quote.text;
+      document.querySelector('.quote-author').textContent = quote.author;
+    }
+
+    // Activity Chart
+    function drawActivityChart() {
+      const canvas = document.getElementById('activityChart');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const data = [
+        { day: 'Mon', values: [15, 20, 5, 10, 8, 12] },
+        { day: 'Tue', values: [25, 15, 10, 5, 15, 10] },
+        { day: 'Wed', values: [20, 10, 8, 12, 20, 15] },
+        { day: 'Thu', values: [10, 25, 15, 8, 12, 18] },
+        { day: 'Fri', values: [30, 20, 12, 15, 10, 8] },
+        { day: 'Sat', values: [25, 15, 20, 10, 12, 15] },
+        { day: 'Sun', values: [20, 18, 15, 12, 10, 8] }
+      ];
+
+      const colors = ['#667eea', '#4CAF50', '#2196F3', '#FF9800', '#E91E63', '#9C27B0'];
+      const barWidth = canvas.width / (data.length * 2);
+      const maxValue = 60;
+
+      data.forEach((day, i) => {
+        const x = i * (canvas.width / data.length) + barWidth;
+        let yOffset = canvas.height - 40;
+
+        day.values.forEach((value, j) => {
+          const height = (value / maxValue) * (canvas.height - 50);
+          ctx.fillStyle = colors[j];
+          ctx.fillRect(x, yOffset - height, barWidth * 0.8, height);
+          yOffset -= height;
+        });
+
+        ctx.fillStyle = '#666';
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(day.day, x + barWidth * 0.4, canvas.height - 10);
+      });
+    }
+
+    // Mood Chart
+    function drawMoodChart() {
+      const canvas = document.getElementById('moodChart');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      const data = [3, 4, 3.5, 4.5, 4, 3.5, 4, 4.5, 3, 3.5, 4, 4.2, 3.8, 4, 4.3];
+      const points = [];
+
+      ctx.strokeStyle = '#4CAF50';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+
+      data.forEach((value, i) => {
+        const x = (i / (data.length - 1)) * canvas.width;
+        const y = canvas.height - (value / 5) * canvas.height;
+        points.push({ x, y });
+
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+
+      ctx.stroke();
+
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.lineTo(0, canvas.height);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(76, 175, 80, 0.1)';
+      ctx.fill();
+
+      points.forEach(point => {
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#4CAF50';
+        ctx.fill();
+      });
+    }
+
+    // Calendar
+    function generateCalendar() {
+      const calendar = document.getElementById('calendar');
+      calendar.innerHTML = '';
+
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      document.getElementById('calendarMonth').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+      const dayHeaders = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+      dayHeaders.forEach(day => {
+        const header = document.createElement('div');
+        header.className = 'calendar-day-header';
+        header.textContent = day;
+        calendar.appendChild(header);
+      });
+
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+      // Add previous month's days
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day other-month';
+        day.textContent = daysInPrevMonth - i;
+        calendar.appendChild(day);
+      }
+
+      // Add current month's days
+      for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day';
+        day.textContent = i;
+        
+        // Check if this is today's date in the current month/year being displayed
+        const todayDate = new Date();
+        if (i === todayDate.getDate() && 
+            currentMonth === todayDate.getMonth() && 
+            currentYear === todayDate.getFullYear()) {
+          day.classList.add('selected');
+        }
+        
+        calendar.appendChild(day);
+      }
+    }
+
+    function changeMonth(delta) {
+      currentMonth += delta;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      generateCalendar();
+    }
+
+    function changeMoodView(view) {
+      document.querySelectorAll('.mood-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('mobileMenu');
+      const menuBtn = document.querySelector('.menu-btn');
+      
+      if (menu && menu.classList.contains('active')) {
+        if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+          menu.classList.remove('active');
+        }
+      }
     });
+
+    // Initialize everything
+    window.onload = function() {
+      initReflections();
+      initSchedule();
+      initSessions();
+      drawActivityChart();
+      drawMoodChart();
+      generateCalendar();
+    };
+
+    window.onresize = function() {
+      drawActivityChart();
+      drawMoodChart();
+    };
   </script>
 </body>
 </html>

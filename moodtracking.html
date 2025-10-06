@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Tracker Dashboard</title>
+  <link rel="stylesheet" href="Styles/moodtracking.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo"><img src="https://i.postimg.cc/ryNG4rDG/Frame-1984078010.png" alt="calmspace_logo"></div>
+    <nav class="nav-links">
+      <a href="index.html"><b>Home</b></a>
+      <a href="features.html"><span style="color:#047857;"><b>Features</b></span></a>
+      <a href="the_guide.html"><b>Guide</b></a>
+      <a href="the_contact.html"><b>Contact</b></a>
+    </nav>
+    <div class="hamburger">&#9776;</div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu">
+    <a href="features.html">Features</a>
+    <a href="the_guide.html">Guide</a>
+    <a href="the_contact.html">Contact</a>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <!-- Mood Tracker -->
+    <section class="tracker-card">
+      <div class="tracker-header">
+        <div>
+          <h2>Mood Tracking</h2>
+          <span class="subtitle">Year 2025</span>
+        </div>
+        <button class="log-btn"><a href="logmood.html">+ Log Mood</a></button>
+      </div>
+
+      <div class="button-group">
+        <button id="btn12m" class="active">12 Months</button>
+        <button id="btn6m">6 Months</button>
+        <button id="btn30d">30 Days</button>
+        <button id="btn7d">7 Days</button>
+        <button id="btnShare">Share</button>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="moodChart"></canvas>
+      </div>
+    </section>
+
+    <!-- Mood History -->
+    <section class="mood-history">
+      <div class="mood-header">
+        <h3>Mood History</h3>
+        <span class="filter">🔍 Filter</span>
+      </div>
+
+      <div class="mood-item">
+        <div class="mood-left">😊 <span>Mon - Started a new project at work</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😐 <span>Tue - Feeling a bit tired</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😁 <span>Wed - Great yoga session!</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😟 <span>Thu - Stressful meeting</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😃 <span>Fri - Looking forward to weekend</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😌 <span>Sat - Relaxing day off</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+      <div class="mood-item">
+        <div class="mood-left">😊 <span>Sun - Family dinner</span></div>
+        <div class="mood-right">7:30 AM</div>
+      </div>
+
+      <div class="view-all">View all entries</div>
+    </section>
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    // Toggle mobile menu
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    hamburger.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+    });
+
+    // Chart datasets
+    const chartData = {
+      "12m": {
+        labels: ["Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan"],
+        data: [3,4,4,5,4,3,4,5,6,7,6,5]
+      },
+      "6m": {
+        labels: ["Aug","Sep","Oct","Nov","Dec","Jan"],
+        data: [4,5,6,7,6,5]
+      },
+      "30d": {
+        labels: Array.from({length: 30}, (_,i)=>`Day ${i+1}`),
+        data: Array.from({length: 30}, ()=>Math.floor(Math.random()*7)+1)
+      },
+      "7d": {
+        labels: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+        data: [5,4,6,3,6,7,5]
+      }
+    };
+
+    // Chart init
+    const ctx = document.getElementById("moodChart").getContext("2d");
+    let moodChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: chartData["12m"].labels,
+        datasets: [{
+          label: "Mood Level",
+          data: chartData["12m"].data,
+          borderColor: "#4b7c68",
+          backgroundColor: "rgba(75,124,104,0.2)",
+          fill: true,
+          tension: 0.3,
+          pointBackgroundColor: "#4b7c68"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { beginAtZero: true, max: 7 }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    // Update chart on button click
+    function updateChart(type, btn) {
+      moodChart.data.labels = chartData[type].labels;
+      moodChart.data.datasets[0].data = chartData[type].data;
+      moodChart.update();
+
+      document.querySelectorAll(".button-group button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    document.getElementById("btn12m").addEventListener("click", function(){ updateChart("12m", this); });
+    document.getElementById("btn6m").addEventListener("click", function(){ updateChart("6m", this); });
+    document.getElementById("btn30d").addEventListener("click", function(){ updateChart("30d", this); });
+    document.getElementById("btn7d").addEventListener("click", function(){ updateChart("7d", this); });
+  </script>
+</body>
+</html>

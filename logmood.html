@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Styles/logmood.css">
+</head>
+<body>
+  <div class="mood-container">
+    <h4>Select your current mood:</h4>
+
+    <div class="mood-options">
+      <label class="mood">
+        <input type="radio" name="mood" value="Amazing">
+        <span>😊</span>
+        <p>Amazing</p>
+      </label>
+      <label class="mood">
+        <input type="radio" name="mood" value="Good">
+        <span>🙂</span>
+        <p>Good</p>
+      </label>
+      <label class="mood">
+        <input type="radio" name="mood" value="Okay">
+        <span>😐</span>
+        <p>Okay</p>
+      </label>
+      <label class="mood">
+        <input type="radio" name="mood" value="Down">
+        <span>😔</span>
+        <p>Down</p>
+      </label>
+      <label class="mood">
+        <input type="radio" name="mood" value="Awful">
+        <span>😣</span>
+        <p>Awful</p>
+      </label>
+    </div>
+
+    <div class="note-section">
+      <label for="note">Add a note (optional)</label>
+      <textarea id="note" placeholder="What’s contributing to your mood today?"></textarea>
+    </div>
+
+    <div class="footer">
+      <p>How are you feeling?</p>
+      <div class="buttons">
+        <button class="cancel">Cancel</button>
+        <button class="save">Save</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

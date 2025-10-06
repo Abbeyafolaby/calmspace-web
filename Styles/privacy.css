@@ -16,12 +16,70 @@
   --tomatoes: rgb(255, 0, 0);
 }
 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .privacy_policy {
-   display: flex;
+  display: flex;
   justify-content: space-between; 
   align-items: center;
   padding: 0 20px; 
   margin-bottom: 20px;
+  background: var(--green9);
+  position: relative;
+  z-index: 100;
+}
+
+#logogo {
+  width: 160px;
+}
+
+#menu-icon {
+  width: 40px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  display: none;
+  background-color: var(--green4);
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 200px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu li {
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.mobile-menu li:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.mobile-menu a:hover {
+  background-color: var(--green5);
 }
 
 .privacy_section {
@@ -35,8 +93,8 @@
   width: 80%;
   max-width: 800px;
   padding: 30px;
-  /* margin-bottom: 30px; */
-  text-align: left; /* paragraphs left-aligned */
+  text-align: left;
+  margin-bottom: 20px;
 }
 
 .privacy h1 {
@@ -47,12 +105,12 @@
 .top {
   background-color: var(--green4);
   color: white;
-  border:1px solid #d4cbcbf9
+  border: 1px solid #d4cbcbf9;
 }
 
 .middle {
   background-color: #fff;
-  border:1px solid #d4cbcbf9
+  border: 1px solid #d4cbcbf9;
 }
 
 .middle h1 {
@@ -61,7 +119,7 @@
 
 .down {
   background-color: var(--green4);
-  border:1px solid #d4cbcbf9
+  border: 1px solid #d4cbcbf9;
 }
 
 .down h1 {
@@ -87,6 +145,7 @@ label {
   margin-bottom: 6px;
   color: white;
   font-size: 14px;
+  text-align: left;
 }
 
 /* Phone input */
@@ -121,24 +180,21 @@ label {
   color: white;
 }
 
-/* Placeholder */
 ::placeholder {
   color: #e0e0e0;
 }
 
-/* Form group */
 .form-group {
   width: 80%;
   max-width: 600px;
   margin: 0 auto 20px auto;
+  color: white;
 }
 
 .form-group label {
-  display: block;
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 14px;
-  color: white;
 }
 
 .form-group textarea {
@@ -157,184 +213,25 @@ label {
 .form-group textarea::placeholder {
   color: #d1d5db;
 }
-label {
-  display: block;
-  width: 100%;
-  max-width: 600px;  
-  margin: 0 auto 2px auto;
+
+.form-group a {
   color: white;
-  font-size: 14px;
-  text-align: left;  
 }
-.form-group a{
-    color:white;
-}
-.form-group{
-    color:white;
-}
-input[type="checkbox"]{
-  position:relative;
-  top:5px;
-  background-color:var(--green3);
+
+input[type="checkbox"] {
+  position: relative;
+  top: 5px;
+  background-color: var(--green3);
   width: 18px;
   height: 18px;
   border: 2px solid #fff;
   border-radius: 4px;
   cursor: pointer;
 }
-.pp img {
-  max-width: 120px; /* control size */
-  height: auto;
-  display:none
-}
-body{
-    font-family:Arial, Helvetica, sans-serif;
-   
-}
-#logogo img{
-    width:200px;
-}
 
-
-
-@media (max-width: 835px) {
-  input[type=text],
-  .phone-input,
-  .form-group {
-    width: 100%;
-    margin: 0 auto 15px auto;
-  }
-
-  label {
-    font-size: 12px;
-  }
-
-  .phone-input select {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  .phone-input input {
-    font-size: 12px;
-    padding: 6px;
-  }
-    .form-group textarea {
-    width: 100%;
-    height: 90px;
-    font-size: 12px;
-  }
-}
-/* Medium screens (tablets) */
+/* Responsive */
 @media (max-width: 768px) {
-  .privacy_policy {
-    padding: 0 15px;
-  }
-  .pp img {
-    max-width: 100px;
-    display:block;
-  }
-
-  .privacy {
-    width: 90%;
-    padding: 20px;
-  }
-
-  input[type=text],
-  .phone-input,
-  .form-group {
-    width: 90%;
-    max-width: 500px;
-  }
-
-  label {
-    max-width: 500px;
-  }
-   .form-group textarea {
-    width: 90%;
-    max-width: 500px;
+  #menu-icon {
+    display: block;
   }
 }
-
-/* Small screens (mobile phones) */
-@media (max-width: 480px) {
- 
-
-  .privacy {
-    width: 95%;
-    padding: 15px;
-  }
-
-  input[type=text],
-  .phone-input,
-  .form-group {
-    width: 95%;
-    max-width: 100%;
-  }
-
-  label {
-    max-width: 100%;
-    font-size: 13px;
-  }
-
-  .phone-input select {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .phone-input input {
-    font-size: 14px;
-    padding: 8px;
-  }
-
-  .form-group textarea {
-    width: 95%;
-    max-width: 100%;
-    height: 100px;
-    font-size: 13px;
-  }
-  .privacy_policy {
-    padding: 0 10px;
-  }
-  .pp img {
-    max-width: 80px;
-    display:block;
-  }
-
-  
-  
-
-}
-
-/* Very small screens (320px and below) */
-@media (max-width: 320px) {
-  input[type=text],
-  .phone-input,
-  .form-group {
-    width: 100%;
-    margin: 0 auto 15px auto;
-  }
-
-  label {
-    font-size: 12px;
-  }
-
-  .phone-input select {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  .phone-input input {
-    font-size: 12px;
-    padding: 6px;
-  }
-    .form-group textarea {
-    width: 100%;
-    height: 90px;
-    font-size: 12px;
-  }
- 
-}
-
-
-
-

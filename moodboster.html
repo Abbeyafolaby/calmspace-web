@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meditation</title>
-  <link rel="stylesheet" href="Styles/meditation.css">
+  <title>Calm Guide</title>
+  <link rel="stylesheet" href="Styles/guide.css">
 </head>
 <body>
 
@@ -47,60 +46,17 @@
     <div class="activity"><a href="journaling.html"><img src="https://i.postimg.cc/YCr9XBR9/journal.png" alt="">Journaling </a></div>
     <div class="activity"><a href="sleep.html"><img src="https://i.postimg.cc/T1TMRfp5/moon.png" alt=""> Sleep</a></div>
     <div class="activity"><a href="sound.html"><img src="https://i.postimg.cc/90sddFZr/music-sign.png" alt=""> Sound Therapy</a></div>
-    <div class="activity"><a href="mood.html"><img src="https://i.postimg.cc/GtDQSyck/smile.png" alt=""> Mood Boosters</a></div>
+    <div class="activity"><a href="moodboster.html"><img src="https://i.postimg.cc/GtDQSyck/smile.png" alt=""> Mood Boosters</a></div>
   </section>
 
-    <div class="image-row">
-    <a href="medsession.html">
-      <img src="https://i.postimg.cc/7hx0XFP8/State-Card-1.png" alt="" style="height:500px;width:500px">
-    </a>
-    <a href="bodyscan.html">
-      <img src="https://i.postimg.cc/m27hhXT7/State-Card-5.png" alt="" style="height:500px;width:500px;">
-    </a>
-  </div>
+  <!-- Calm Sections -->
+  <section class="calm-sections">
 
-  <!-- ✅ JavaScript -->
-  <script>
-    const menuIcon = document.getElementById("menu-icon");
-    const navLinks = document.querySelector(".nav-links");
+    <a href="the.7.html"><img src="https://i.postimg.cc/25ZtfZQj/State-Card-7.png" alt=""></a>
+    
+  </section>
 
-    menuIcon.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
-    });
-
-  async function fetchUserData() {
-    const token = localStorage.getItem("authToken");
-
-    if (!token) {
-      console.log("No token found, user not logged in.");
-      return;
-    }
-
-    try {
-      const res = await fetch("https://calmspace-api.onrender.com/api/user/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch user data");
-      }
-
-      const data = await res.json();
-      console.log("User data:", data);
-
-      // Example: show user's name on page
-      document.getElementById("userName").textContent = data.fullname;
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-
-  // Call it automatically on page load
-  fetchUserData();
-  </script>
+ 
 
 </body>
 </html>
-

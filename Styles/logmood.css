@@ -1,0 +1,146 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.mood-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  padding: 30px;
+  width: 600px;
+}
+
+.mood-container h4 {
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #333;
+}
+
+.mood-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mood input {
+  display: none;
+}
+
+.mood span {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.mood p {
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: #333;
+}
+
+.mood input:checked + span {
+  transform: scale(1.3);
+}
+
+.note-section {
+  margin-bottom: 30px;
+}
+
+.note-section label {
+  display: block;
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.note-section textarea {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  padding: 10px;
+  font-size: 0.9rem;
+  outline: none;
+  resize: none;
+}
+
+.note-section textarea:focus {
+  border-color: #6cb8a8;
+}
+
+.footer {
+  background-color: #f8fdfb;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+.footer p {
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button.cancel {
+  background-color: #f2f5f3;
+  color: #333;
+}
+
+button.save {
+  background-color: #c7e8d3;
+  color: #2f6d4f;
+  font-weight: 500;
+}
+
+button.cancel:hover {
+  background-color: #e9eceb;
+}
+
+button.save:hover {
+  background-color: #b4dfc1;
+}
+
+@media (max-width: 600px) {
+  .mood-options {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .mood-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
+}
