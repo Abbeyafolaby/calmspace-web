@@ -1,48 +1,4 @@
-// Debug logger that persists across redirects
-const DebugLogger = {
-    logs: [],
-    
-    log: function(message, data = null) {
-        const timestamp = new Date().toISOString();
-        const logEntry = { timestamp, message, data };
-        this.logs.push(logEntry);
-        console.log(`[${timestamp}] ${message}`, data || '');
-        
-        // Save to localStorage for persistence
-        try {
-            const existingLogs = JSON.parse(localStorage.getItem('debug_logs') || '[]');
-            existingLogs.push(logEntry);
-            // Keep only last 50 logs
-            if (existingLogs.length > 50) existingLogs.shift();
-            localStorage.setItem('debug_logs', JSON.stringify(existingLogs));
-        } catch(e) {
-            console.error('Failed to save debug log:', e);
-        }
-    },
-    
-    showLogs: function() {
-        try {
-            const logs = JSON.parse(localStorage.getItem('debug_logs') || '[]');
-            console.table(logs);
-            return logs;
-        } catch(e) {
-            console.error('Failed to retrieve logs:', e);
-            return [];
-        }
-    },
-    
-    clearLogs: function() {
-        localStorage.removeItem('debug_logs');
-        this.logs = [];
-        console.log('Debug logs cleared');
-    }
-};
-
-// Make it globally accessible for debugging in console
-window.DebugLogger = DebugLogger;
-
-DebugLogger.log('Dashboard script loaded');
-
+// API URL Configuration
 const API_URL = (() => {
     const hostname = window.location.hostname;
     const protocol = window.location.protocol;
@@ -54,53 +10,35 @@ const API_URL = (() => {
                    hostname.endsWith('.local') ||
                    protocol === 'file:';
     
-    const apiUrl = isLocal 
+    return isLocal 
         ? "http://localhost:5000/api/auth"  
         : "https://calmspace-api.onrender.com/api/auth";
-    
-    DebugLogger.log('Environment Detection', {
-        hostname,
-        protocol,
-        isLocal,
-        apiUrl
-    });
-    
-    return apiUrl;
 })();
 
+// Token Management
 const TokenManager = {
     get: () => {
-        DebugLogger.log('TokenManager.get() called');
-        
         const urlParams = new URLSearchParams(window.location.search);
         const urlToken = urlParams.get('token');
         
         if (urlToken) {
-            DebugLogger.log('Token found in URL', { tokenLength: urlToken.length });
             localStorage.setItem('token', urlToken);
             TokenManager.clearTokenFromURL();
             return urlToken;
         }
         
-        const storageToken = localStorage.getItem('token');
-        DebugLogger.log('Token from localStorage', { 
-            found: !!storageToken,
-            tokenLength: storageToken ? storageToken.length : 0
-        });
-        return storageToken;
+        return localStorage.getItem('token');
     },
     
     set: (token) => {
         if (token) {
             localStorage.setItem('token', token);
-            DebugLogger.log('Token saved to localStorage', { tokenLength: token.length });
         }
     },
     
     remove: () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        DebugLogger.log('Token removed from localStorage');
     },
     
     clearTokenFromURL: () => {
@@ -108,18 +46,15 @@ const TokenManager = {
             const url = new URL(window.location);
             url.searchParams.delete('token');
             window.history.replaceState({}, document.title, url.pathname);
-            DebugLogger.log('Token cleared from URL');
         }
     }
 };
 
+// Make Authenticated API Request
 const makeAuthenticatedRequest = async (endpoint, options = {}) => {
-    DebugLogger.log('Making authenticated request', { endpoint });
-    
     const token = TokenManager.get();
     
     if (!token) {
-        DebugLogger.log('ERROR: No token available');
         throw new Error('NO_TOKEN');
     }
     
@@ -142,16 +77,9 @@ const makeAuthenticatedRequest = async (endpoint, options = {}) => {
     };
     
     const fullUrl = `${API_URL}${endpoint}`;
-    DebugLogger.log('Request URL', { fullUrl });
     
     try {
         const response = await fetch(fullUrl, finalOptions);
-        
-        DebugLogger.log('Response received', { 
-            status: response.status,
-            ok: response.ok,
-            statusText: response.statusText
-        });
         
         if (!response.ok) {
             let errorData;
@@ -163,24 +91,18 @@ const makeAuthenticatedRequest = async (endpoint, options = {}) => {
                 } else {
                     errorData = { message: await response.text() };
                 }
-                DebugLogger.log('Error response data', errorData);
             } catch (e) {
                 errorData = { message: `HTTP ${response.status} - ${response.statusText}` };
-                DebugLogger.log('Failed to parse error response', { error: e.message });
             }
             
             if (response.status === 401) {
-                DebugLogger.log('UNAUTHORIZED - removing token');
                 TokenManager.remove();
                 throw new Error('UNAUTHORIZED');
             } else if (response.status === 403) {
-                DebugLogger.log('FORBIDDEN');
                 throw new Error('FORBIDDEN');
             } else if (response.status === 404) {
-                DebugLogger.log('NOT_FOUND');
                 throw new Error('NOT_FOUND');
             } else if (response.status >= 500) {
-                DebugLogger.log('SERVER_ERROR');
                 throw new Error('SERVER_ERROR');
             }
             
@@ -188,74 +110,51 @@ const makeAuthenticatedRequest = async (endpoint, options = {}) => {
         }
         
         const data = await response.json();
-        DebugLogger.log('Request successful', { dataKeys: Object.keys(data) });
         return data;
         
     } catch (error) {
-        DebugLogger.log('Request failed with exception', { 
-            errorName: error.name,
-            errorMessage: error.message
-        });
-        
         if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
-            DebugLogger.log('NETWORK_ERROR detected');
             throw new Error('NETWORK_ERROR');
         }
-        
         throw error;
     }
 };
 
-const authenticateUser = async () => {
-    DebugLogger.log('=== AUTHENTICATION CHECK STARTED ===');
+// Update user display (name and avatar)
+const updateUserDisplay = (userData) => {
+    // Update greeting with nickname
+    const greetingElement = document.querySelector('.greeting');
+    if (greetingElement && userData.nickname) {
+        greetingElement.textContent = `Hello ${userData.nickname}!`;
+    }
     
+    // Update avatar with first letter of nickname
+    const avatarElement = document.querySelector('.avatar');
+    if (avatarElement && userData.nickname) {
+        const firstLetter = userData.nickname.charAt(0).toUpperCase();
+        avatarElement.textContent = firstLetter;
+    }
+};
+
+// Authenticate User
+const authenticateUser = async () => {
     try {
         const token = TokenManager.get();
         
         if (!token) {
-            DebugLogger.log('CRITICAL: No token found - will redirect to signin');
             throw new Error('NO_TOKEN');
         }
         
-        DebugLogger.log('Token exists, verifying with server...');
-        
         const userData = await makeAuthenticatedRequest('/me');
         
-        DebugLogger.log('Authentication successful', {
-            userId: userData.id,
-            email: userData.email,
-            nickname: userData.nickname
-        });
-        
-        const nicknameElement = document.getElementById('userNickname');
-        if (nicknameElement && userData.nickname) {
-            nicknameElement.textContent = userData.nickname;
-            DebugLogger.log('UI updated with nickname');
-        }
+        // Update user display (greeting and avatar)
+        updateUserDisplay(userData);
         
         localStorage.setItem('user', JSON.stringify(userData));
-        DebugLogger.log('=== AUTHENTICATION CHECK COMPLETED ===');
         
         return userData;
         
     } catch (error) {
-        DebugLogger.log('AUTHENTICATION FAILED', { error: error.message });
-        
-        // Don't redirect immediately - give time to see logs
-        const shouldRedirect = confirm(
-            `Authentication failed: ${error.message}\n\n` +
-            `Click OK to redirect to signin.\n` +
-            `Click Cancel to stay and check console logs.\n\n` +
-            `To view debug logs, open console and type: DebugLogger.showLogs()`
-        );
-        
-        if (!shouldRedirect) {
-            DebugLogger.log('User chose to stay - showing logs');
-            console.log('=== DEBUG LOGS ===');
-            DebugLogger.showLogs();
-            throw error; // Don't redirect
-        }
-        
         // Handle different error types
         switch (error.message) {
             case 'NO_TOKEN':
@@ -271,12 +170,8 @@ const authenticateUser = async () => {
             case 'NETWORK_ERROR':
                 const cachedUser = localStorage.getItem('user');
                 if (cachedUser) {
-                    DebugLogger.log('Using cached user data due to network error');
                     const userData = JSON.parse(cachedUser);
-                    const nicknameElement = document.getElementById('userNickname');
-                    if (nicknameElement && userData.nickname) {
-                        nicknameElement.textContent = userData.nickname;
-                    }
+                    updateUserDisplay(userData);
                     showNetworkWarning();
                     return userData;
                 }
@@ -287,12 +182,12 @@ const authenticateUser = async () => {
                 TokenManager.remove();
         }
         
-        DebugLogger.log('Redirecting to signin page');
         window.location.href = 'signin.html';
         throw error;
     }
 };
 
+// Show network warning
 const showNetworkWarning = () => {
     const warning = document.createElement('div');
     warning.style.cssText = `
@@ -317,164 +212,452 @@ const showNetworkWarning = () => {
     }, 5000);
 };
 
-const initializeCharts = () => {
-    DebugLogger.log('Initializing charts...');
-    try {
-        const activityChart = document.getElementById("activityChart");
-        const moodChart = document.getElementById("moodChart");
-
-        if (activityChart && typeof Chart !== 'undefined') {
-            new Chart(activityChart, {
-                type: "bubble",
-                data: {
-                    datasets: [{
-                        label: "Weekly Activities",
-                        data: [
-                            {x: 1, y: 20, r: 10},
-                            {x: 2, y: 30, r: 12},
-                            {x: 3, y: 25, r: 14},
-                            {x: 4, y: 60, r: 18},
-                            {x: 5, y: 45, r: 15},
-                            {x: 6, y: 40, r: 16}
-                        ],
-                        backgroundColor: "#8bcba7"
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: {
-                                callback: value => ["","Yoga","Journaling","Breathing","Music","Sound Therapy","Mood Tracking"][value]
-                            },
-                            grid: { drawOnChartArea: false }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            max: 70,
-                            title: { display: true, text: "Minutes" }
-                        }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-            DebugLogger.log('Activity chart initialized');
-        }
-
-        if (moodChart && typeof Chart !== 'undefined') {
-            new Chart(moodChart, {
-                type: "line",
-                data: {
-                    labels: ["Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan"],
-                    datasets: [{
-                        label: "Mood Level",
-                        data: [3,4,3,5,4,6,5,6,5,7,6,8],
-                        borderColor: "#8bcba7",
-                        backgroundColor: "rgba(139,203,167,0.2)",
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 6,
-                        pointBackgroundColor: "#8bcba7"
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            min: 1,
-                            max: 5,
-                            ticks: {
-                                stepSize: 1,
-                                callback: value => ["😡","😕","🙂","😀","😄"][value-1]
-                            }
-                        }
-                    },
-                    plugins: { legend: { display: false } }
-                }
-            });
-            DebugLogger.log('Mood chart initialized');
-        }
-    } catch (error) {
-        DebugLogger.log('Chart initialization error', { error: error.message });
-    }
-};
-
+// Handle Logout
 const handleLogout = async () => {
-    DebugLogger.log('Logout initiated');
-    
     const token = TokenManager.get();
     TokenManager.remove();
     
     try {
         if (token) {
             await makeAuthenticatedRequest('/logout', { method: 'POST' });
-            DebugLogger.log('Backend logout successful');
         }
     } catch (error) {
-        DebugLogger.log('Backend logout failed (non-critical)', { error: error.message });
+        console.error('Logout error:', error);
     }
     
     window.location.href = 'signin.html';
 };
 
-const initializeMenuToggle = () => {
-    const menuToggle = document.getElementById("menuToggle");
-    const menuList = document.getElementById("menuList");
+// Dashboard UI Data
+const quotes = [
+    { text: '"Rest is not weakness, it\'s renewal."', author: 'Reframes rest as a form of...' },
+    { text: '"Progress, not perfection."', author: 'Embracing the journey of growth...' },
+    { text: '"You are stronger than you think."', author: 'Building inner resilience...' },
+    { text: '"One day at a time."', author: 'The power of present moment...' }
+];
 
-    if (menuToggle && menuList) {
-        menuToggle.addEventListener("click", () => {
-            menuList.classList.toggle("show");
-        });
-        DebugLogger.log('Menu toggle initialized');
+const reflections = [
+    { question: 'What three things am I grateful for today?', time: '8 minutes' },
+    { question: 'What emotion stood out the most for today?', time: '5 minutes' },
+    { question: 'What is one small win I achieved today?', time: '3 minutes' }
+];
+
+const schedule = [
+    { title: 'Breathing exercise', time: '30 minutes' },
+    { title: 'Yoga', time: '45 minutes' },
+    { title: 'Music listening', time: '20 minutes' },
+    { title: 'Meditation session', time: '15 minutes' }
+];
+
+const sessions = [
+    { 
+        title: 'Breathe Away Stress', 
+        author: 'by Isabella Thompson', 
+        duration: 352,
+        audioUrl: 'https://living-jade-ktakggbrow.edgeone.app/calm-yoga-lofi-peaceful-meditation-beat-247403%20(online-audio-converter.com).mp3'
+    },
+    { 
+        title: 'Drift Into Sleep', 
+        author: 'by Amani Okafor', 
+        duration: 186,
+        audioUrl: 'https://operational-yellow-pzor5q1akr.edgeone.app/slowlife.mp3'
+    },
+    { 
+        title: 'Morning Clarity', 
+        author: 'by Sofia Garcia', 
+        duration: 240,
+        audioUrl: 'https://orthodox-scarlet-fur8jrr6ac.edgeone.app/embracingthesky.mp3'
+    },
+    { 
+        title: 'Quiet the Mind', 
+        author: 'by James Liu', 
+        duration: 330,
+        audioUrl: 'https://related-silver-ur8kqpycwe.edgeone.app/inspire.mp3'
+    },
+    { 
+        title: 'Finding Your Calm Routine', 
+        author: 'by Maria Santos', 
+        duration: 300,
+        audioUrl: 'https://operational-yellow-pzor5q1akr.edgeone.app/slowlife.mp3'
+    },
+    { 
+        title: 'From Anxious to Aware', 
+        author: 'by Monifa Robson', 
+        duration: 420,
+        audioUrl: 'https://orthodox-scarlet-fur8jrr6ac.edgeone.app/embracingthesky.mp3'
     }
+];
+
+// Calendar variables
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+let currentDay = new Date().getDate();
+let currentAudio = null;
+let currentPlayingIndex = -1;
+
+// Format time helper
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+// Initialize reflection list
+function initReflections() {
+    const list = document.getElementById('reflectionList');
+    if (!list) return;
+    
+    reflections.forEach(item => {
+        list.innerHTML += `
+            <div class="reflection-item">
+                <div class="reflection-question">${item.question}</div>
+                <div class="reflection-time">${item.time}</div>
+            </div>
+        `;
+    });
+}
+
+// Initialize schedule list
+function initSchedule() {
+    const list = document.getElementById('scheduleList');
+    if (!list) return;
+    
+    schedule.forEach(item => {
+        list.innerHTML += `
+            <div class="schedule-item" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div class="schedule-title">${item.title}</div>
+                    <div class="schedule-time">${item.time}</div>
+                </div>
+                <button class="menu-dots">⋯</button>
+            </div>
+        `;
+    });
+}
+
+// Initialize sessions list with audio functionality
+function initSessions() {
+    const list = document.getElementById('sessionsList');
+    if (!list) return;
+    
+    sessions.forEach((item, index) => {
+        const sessionDiv = document.createElement('div');
+        sessionDiv.className = 'session-item';
+        sessionDiv.innerHTML = `
+            <div class="session-info">
+                <h4>${item.title}</h4>
+                <div class="session-author">${item.author}</div>
+                <div class="progress-bar" data-index="${index}">
+                    <div class="progress-fill" id="progress-${index}"></div>
+                </div>
+            </div>
+            <div class="session-controls">
+                <div class="session-time-display">
+                    <span class="time-current" id="current-${index}">0:00</span>
+                    <span class="time-total">${formatTime(item.duration)}</span>
+                </div>
+                <button class="play-btn" data-index="${index}">▶</button>
+            </div>
+        `;
+        list.appendChild(sessionDiv);
+    });
+
+    // Add event listeners
+    document.querySelectorAll('.play-btn').forEach(btn => {
+        btn.addEventListener('click', handlePlayPause);
+    });
+
+    document.querySelectorAll('.progress-bar').forEach(bar => {
+        bar.addEventListener('click', handleProgressClick);
+    });
+}
+
+// Handle play/pause
+function handlePlayPause(e) {
+    const index = parseInt(e.target.dataset.index);
+    const btn = e.target;
+
+    if (currentPlayingIndex === index && currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        return;
+    }
+
+    if (currentAudio) {
+        currentAudio.pause();
+        if (currentPlayingIndex >= 0) {
+            const oldBtn = document.querySelector(`.play-btn[data-index="${currentPlayingIndex}"]`);
+            if (oldBtn) {
+                oldBtn.textContent = '▶';
+                oldBtn.classList.remove('playing');
+            }
+        }
+    }
+
+    if (currentPlayingIndex !== index) {
+        currentAudio = new Audio(sessions[index].audioUrl);
+        currentAudio.addEventListener('loadedmetadata', () => {
+            sessions[index].duration = currentAudio.duration;
+            const totalTimeEl = document.querySelector(`#current-${index}`).nextElementSibling;
+            if (totalTimeEl) {
+                totalTimeEl.textContent = formatTime(currentAudio.duration);
+            }
+        });
+    }
+
+    currentPlayingIndex = index;
+    currentAudio.play();
+    btn.textContent = '⏸';
+    btn.classList.add('playing');
+
+    currentAudio.addEventListener('timeupdate', () => {
+        updateProgress(index);
+    });
+
+    currentAudio.addEventListener('ended', () => {
+        btn.textContent = '▶';
+        btn.classList.remove('playing');
+        document.getElementById(`progress-${index}`).style.width = '0%';
+        document.getElementById(`current-${index}`).textContent = '0:00';
+    });
+}
+
+// Update progress bar and time
+function updateProgress(index) {
+    if (currentAudio) {
+        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+        document.getElementById(`progress-${index}`).style.width = progress + '%';
+        document.getElementById(`current-${index}`).textContent = formatTime(currentAudio.currentTime);
+    }
+}
+
+// Handle progress bar click (seek)
+function handleProgressClick(e) {
+    const index = parseInt(e.currentTarget.dataset.index);
+    
+    if (currentPlayingIndex === index && currentAudio) {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        currentAudio.currentTime = percentage * currentAudio.duration;
+    }
+}
+
+// Change quote
+let currentQuoteIndex = 0;
+window.changeQuote = function() {
+    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+    const quote = quotes[currentQuoteIndex];
+    const quoteTextEl = document.querySelector('.quote-text');
+    const quoteAuthorEl = document.querySelector('.quote-author');
+    if (quoteTextEl) quoteTextEl.textContent = quote.text;
+    if (quoteAuthorEl) quoteAuthorEl.textContent = quote.author;
 };
 
-document.addEventListener("DOMContentLoaded", async () => {
-    DebugLogger.log('=== DASHBOARD INITIALIZATION STARTED ===');
-    DebugLogger.log('Current URL', { url: window.location.href });
+// Activity Chart
+function drawActivityChart() {
+    const canvas = document.getElementById('activityChart');
+    if (!canvas) return;
     
-    try {
-        initializeMenuToggle();
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const data = [
+        { day: 'Mon', values: [15, 20, 5, 10, 8, 12] },
+        { day: 'Tue', values: [25, 15, 10, 5, 15, 10] },
+        { day: 'Wed', values: [20, 10, 8, 12, 20, 15] },
+        { day: 'Thu', values: [10, 25, 15, 8, 12, 18] },
+        { day: 'Fri', values: [30, 20, 12, 15, 10, 8] },
+        { day: 'Sat', values: [25, 15, 20, 10, 12, 15] },
+        { day: 'Sun', values: [20, 18, 15, 12, 10, 8] }
+    ];
+
+    const colors = ['#667eea', '#4CAF50', '#2196F3', '#FF9800', '#E91E63', '#9C27B0'];
+    const barWidth = canvas.width / (data.length * 2);
+    const maxValue = 60;
+
+    data.forEach((day, i) => {
+        const x = i * (canvas.width / data.length) + barWidth;
+        let yOffset = canvas.height - 40;
+
+        day.values.forEach((value, j) => {
+            const height = (value / maxValue) * (canvas.height - 50);
+            ctx.fillStyle = colors[j];
+            ctx.fillRect(x, yOffset - height, barWidth * 0.8, height);
+            yOffset -= height;
+        });
+
+        ctx.fillStyle = '#666';
+        ctx.font = '12px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(day.day, x + barWidth * 0.4, canvas.height - 10);
+    });
+}
+
+// Mood Chart
+function drawMoodChart() {
+    const canvas = document.getElementById('moodChart');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+
+    const data = [3, 4, 3.5, 4.5, 4, 3.5, 4, 4.5, 3, 3.5, 4, 4.2, 3.8, 4, 4.3];
+    const points = [];
+
+    ctx.strokeStyle = '#4CAF50';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    data.forEach((value, i) => {
+        const x = (i / (data.length - 1)) * canvas.width;
+        const y = canvas.height - (value / 5) * canvas.height;
+        points.push({ x, y });
+
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+    });
+
+    ctx.stroke();
+
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(76, 175, 80, 0.1)';
+    ctx.fill();
+
+    points.forEach(point => {
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#4CAF50';
+        ctx.fill();
+    });
+}
+
+// Calendar functions
+function generateCalendar() {
+    const calendar = document.getElementById('calendar');
+    if (!calendar) return;
+    
+    calendar.innerHTML = '';
+
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    const calendarMonthEl = document.getElementById('calendarMonth');
+    if (calendarMonthEl) {
+        calendarMonthEl.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+    }
+
+    const dayHeaders = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    dayHeaders.forEach(day => {
+        const header = document.createElement('div');
+        header.className = 'calendar-day-header';
+        header.textContent = day;
+        calendar.appendChild(header);
+    });
+
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day other-month';
+        day.textContent = daysInPrevMonth - i;
+        calendar.appendChild(day);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day';
+        day.textContent = i;
         
-        if (typeof Chart !== 'undefined') {
-            initializeCharts();
-        } else {
-            DebugLogger.log('Chart.js not loaded');
+        const todayDate = new Date();
+        if (i === todayDate.getDate() && 
+            currentMonth === todayDate.getMonth() && 
+            currentYear === todayDate.getFullYear()) {
+            day.classList.add('selected');
         }
         
+        calendar.appendChild(day);
+    }
+}
+
+window.changeMonth = function(delta) {
+    currentMonth += delta;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    generateCalendar();
+};
+
+window.changeMoodView = function(view) {
+    document.querySelectorAll('.mood-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+};
+
+window.toggleMobileMenu = function() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu) menu.classList.toggle('active');
+};
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('mobileMenu');
+    const menuBtn = document.querySelector('.menu-btn');
+    
+    if (menu && menu.classList.contains('active')) {
+        if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    }
+});
+
+// Initialize all dashboard UI components
+const initializeDashboardUI = () => {
+    initReflections();
+    initSchedule();
+    initSessions();
+    drawActivityChart();
+    drawMoodChart();
+    generateCalendar();
+};
+
+// Resize handler
+window.addEventListener('resize', () => {
+    drawActivityChart();
+    drawMoodChart();
+});
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        // Initialize dashboard UI components
+        initializeDashboardUI();
+        
+        // Authenticate user and update display
         await authenticateUser();
         
+        // Attach logout handler
         const logoutBtn = document.getElementById("logoutBtn");
         if (logoutBtn) {
             logoutBtn.addEventListener("click", (e) => {
                 e.preventDefault();
                 handleLogout();
             });
-            DebugLogger.log('Logout handler attached');
         }
         
-        DebugLogger.log('=== DASHBOARD INITIALIZATION COMPLETED ===');
-        
     } catch (error) {
-        DebugLogger.log('Dashboard initialization failed', { error: error.message });
+        console.error('Dashboard initialization failed:', error);
     }
-});
-
-// Prevent redirect loop by showing alert
-let redirectCount = parseInt(sessionStorage.getItem('redirectCount') || '0');
-if (redirectCount > 2) {
-    DebugLogger.log('REDIRECT LOOP DETECTED', { count: redirectCount });
-    alert('Redirect loop detected! Check console logs: DebugLogger.showLogs()');
-    sessionStorage.setItem('redirectCount', '0');
-} else {
-    sessionStorage.setItem('redirectCount', (redirectCount + 1).toString());
-}
-
-// Clear redirect count on successful load
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        sessionStorage.setItem('redirectCount', '0');
-    }, 2000);
 });
